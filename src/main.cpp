@@ -8,7 +8,7 @@ int main(){
 	
 	short int tam_matriz, qtd_matriz;
 	//int i=0;
-	//int linha=0, coluna=0;
+	int linha=0, coluna=0, vida=10;
 	
 	tie(tam_matriz, qtd_matriz) = LePrimeraLinha();
 	cout << "Codigo Jullia" << endl;
@@ -22,6 +22,8 @@ int main(){
 
 	//tie(linha, coluna) = PosicaoInicial(linha, coluna, tam_matriz);
 	LerArquivo(matriz, tam_matriz, qtd_matriz);
+	StartJogo(linha, coluna, tam_matriz, qtd_matriz, vida);
+	//ImprimirMatriz(matriz, tam_matriz);
 	//RandomLinha(tam_matriz, tam_matriz);
 	//CriandoArquivoParaCadaMatriz(qtd_matriz, i);
 
