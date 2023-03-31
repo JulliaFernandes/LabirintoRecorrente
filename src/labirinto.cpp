@@ -79,8 +79,8 @@ void LerArquivo(string **matriz, int tam_matriz, int qtd_matriz){
             }
             else{
                 if(linhaVazia(linha_arq)){
-                    cout << "---------------------------------------------";
-                    cout << "\n\t---Nova Matriz---" << endl;
+                    //cout << "---------------------------------------------";
+                    //cout << "\n\t---Nova Matriz---" << endl;
                     CriandoArquivoParaCadaMatriz(matriz, tam_matriz, qtd_matriz, i);
                     //ImprimirMatriz(matriz, tam_matriz);
                     aux_coluna = 0;
@@ -108,8 +108,8 @@ void LerArquivo(string **matriz, int tam_matriz, int qtd_matriz){
     }
     arquivo.close();  
 
-    cout << "---------------------------------------------";
-    cout << "\n\taa---Nova Matriz---" << endl;
+    //cout << "---------------------------------------------";
+    //cout << "\n\taa---Nova Matriz---" << endl;
     CriandoArquivoParaCadaMatriz(matriz, tam_matriz, qtd_matriz, i);
     //ImprimirMatriz(matriz, tam_matriz);
 }
@@ -124,67 +124,20 @@ void ImprimirMatriz(string **matriz, int tam_matriz){
     }
 }
 
-int RandomLinha(short int linha, short int tam_matriz){
-    short int linha_randomica=0;
-    srand(time(nullptr));
-    if(linha == 0){
-        linha_randomica = rand() %2;
-        cout << "Randomico" << linha_randomica << endl;
-    }
-    else if(linha == tam_matriz){
-        linha_randomica = rand() %2;
-        if(linha_randomica == 1){
-            linha_randomica*=-1;
-        }
-        cout << "Randomico" << linha_randomica << endl;
-    }
-    else{
-        string vetor_str[] = {"-1", "1", "0"};
-        string num_str = vetor_str[rand()%3];
-        linha_randomica = atoi(num_str.c_str());
-        cout << "Randomico" << linha_randomica << endl;
-    }
-
-    return linha_randomica;
-}
-int RandomColuna(short int coluna, short int tam_matriz){
-    short int coluna_randomica=0;
-    srand(time(nullptr));
-    if(coluna == 0){
-        coluna_randomica = rand() %2;
-        cout << "Randomico" << coluna_randomica << endl;
-    }
-    else if(coluna == tam_matriz){
-        coluna_randomica = rand() %2;
-        if(coluna_randomica == 1){
-            coluna_randomica*=-1;
-        }
-        cout << "Randomico" << coluna_randomica << endl;
-    }
-    else{
-        string vetor_str[] = {"-1", "1", "0"};
-        string num_str = vetor_str[rand()%3];
-        coluna_randomica = atoi(num_str.c_str());
-        cout << "Randomico" << coluna_randomica << endl;
-    }
-
-    return coluna_randomica;
-}
-
 void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int& vida){
     srand(42);
 
-    int linha_aux=linha, coluna_aux=coluna, i=1;
+    int linha_aux=linha, coluna_aux=coluna;
     int mochila=0, acao=0;
     bool auxVida = Vida(vida, acao);
     //string valorCaminho_str;
     //stringstream aux;
 
+    cout << "\n\t---Nova Matriz---" << endl;
     ImprimirMatriz(matriz, tam_matriz);
 
     while(linha_aux < tam_matriz && coluna_aux < tam_matriz && auxVida != false){
-        cout << "Entrou aqui: " << i << endl;
-        i++;
+        cout << ">Posição[" << linha_aux << "]" << "[" << coluna_aux << "]" <<endl;
         if(linha_aux != tam_matriz-1 && coluna_aux != tam_matriz-1){
             int direcaoAleatoria = rand()%8;
             cout << "\nNumero aleatorio: " << direcaoAleatoria << endl;
@@ -194,26 +147,29 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         if(matriz[linha_aux][coluna_aux+1] == "*"){
                             acao=-1;
                             Vida(vida, acao);
-                            //vida--;
                             coluna_aux++;
-                            //cout << "\nAAAAAAAAAAACOLUNAAAA: " << coluna_aux << endl;
                             ImprimirMatriz(matriz, tam_matriz);
                             cout << "\nVida: " << vida << endl;
                         }
                         else{ //é pq é um numero
                             coluna_aux++;
-                            cout << "\nAAAAAAAAAAACOLUNAAAA: " << coluna_aux << endl;
-                            /*valorCaminho_str =  matriz[linha_aux][coluna_aux];
-                            valorCaminho = atoi(valorCaminho_str.c_str());
-                            valorCaminho--;
-                            aux << valorCaminho;
-                            valorCaminho_str  = aux.str();
-                            aux.str("");
-                            matriz[linha_aux][coluna_aux]=valorCaminho_str;*/
-                            MudaValorCaminho(matriz, linha_aux, coluna_aux);
-                            mochila++;
-                            ImprimirMatriz(matriz, tam_matriz);
-                            cout << "\nMochila: " << mochila << endl;
+                            if(matriz[linha_aux][coluna_aux]!="0"){
+                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                                mochila++;
+                                if(mochila==4){
+                                    if(vida<10){
+                                        int acao_aux;
+                                        acao_aux=1;
+                                        Vida(vida, acao_aux); 
+                                    }
+                                    mochila=0;
+                                }
+                                ImprimirMatriz(matriz, tam_matriz);
+                                cout << "\nMochila: " << mochila << endl;
+                            }
+                            else{//o valor nessa casa é diferente de zero
+
+                            }
                         }
                     }
                     acao = 0;
@@ -225,17 +181,30 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         if(matriz[linha_aux][coluna_aux-1] == "*"){
                             acao=-1;
                             Vida(vida, acao);
-                            //vida--;
                             coluna_aux--;
                             ImprimirMatriz(matriz, tam_matriz);
                             cout << "\nVida: " << vida << endl;
                         }
                         else{ // é pq é um numero
                             coluna_aux--;
-                            MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                            if(matriz[linha_aux][coluna_aux]!="0"){
+                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                                mochila++;
+                                if(mochila==4){
+                                    if(vida<10){
+                                        int acao_aux;
+                                        acao_aux=1;
+                                        Vida(vida, acao_aux); 
+                                    }
+                                    mochila=0;
+                                }
+                                ImprimirMatriz(matriz, tam_matriz);
+                                cout << "\nMochila: " << mochila << endl;
+                            }
+                            /*MudaValorCaminho(matriz, linha_aux, coluna_aux);
                             mochila++;
                             ImprimirMatriz(matriz, tam_matriz);
-                            cout << "\nMochila: " << mochila << endl;
+                            cout << "\nMochila: " << mochila << endl;*/
                         }
                     }
                     acao = 0;
@@ -247,17 +216,30 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         if(matriz[linha_aux-1][coluna_aux] == "*"){
                             acao=-1;
                             Vida(vida, acao);
-                            //vida--;
                             linha_aux--;
                             ImprimirMatriz(matriz, tam_matriz);
                             cout << "\nVida: " << vida << endl;
                         }
                         else{ //é pq é um numero
                             linha_aux--;
-                            MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                            if(matriz[linha_aux][coluna_aux]!="0"){
+                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                                mochila++;
+                                if(mochila==4){
+                                    if(vida<10){
+                                        int acao_aux;
+                                        acao_aux=1;
+                                        Vida(vida, acao_aux); 
+                                    }
+                                    mochila=0;
+                                }
+                                ImprimirMatriz(matriz, tam_matriz);
+                                cout << "\nMochila: " << mochila << endl;
+                            }
+                            /*MudaValorCaminho(matriz, linha_aux, coluna_aux);
                             mochila++;
                             ImprimirMatriz(matriz, tam_matriz);
-                            cout << "\nMochila: " << mochila << endl;
+                            cout << "\nMochila: " << mochila << endl;*/
                         }
                     }
                     acao = 0;
@@ -269,17 +251,30 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         if(matriz[linha_aux+1][coluna_aux] == "*"){
                             acao=-1;
                             Vida(vida, acao);
-                            //vida--;
                             linha_aux++;
                             ImprimirMatriz(matriz, tam_matriz);
                             cout << "\nVida: " << vida << endl;
                         }
                         else{ //é pq é numero
                             linha_aux++;
-                            MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                            if(matriz[linha_aux][coluna_aux]!="0"){
+                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                                mochila++;
+                                if(mochila==4){
+                                    if(vida<10){
+                                        int acao_aux;
+                                        acao_aux=1;
+                                        Vida(vida, acao_aux); 
+                                    }
+                                    mochila=0;
+                                }
+                                ImprimirMatriz(matriz, tam_matriz);
+                                cout << "\nMochila: " << mochila << endl;
+                            }
+                            /*MudaValorCaminho(matriz, linha_aux, coluna_aux);
                             mochila++;
                             ImprimirMatriz(matriz, tam_matriz);
-                            cout << "\nMochila: " << mochila << endl;
+                            cout << "\nMochila: " << mochila << endl;*/
                         }
                     }
                     acao = 0;
@@ -291,7 +286,6 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         if(matriz[linha_aux-1][coluna_aux-1]  == "*"){
                             acao=-1;
                             Vida(vida, acao);
-                            //vida--;
                             linha_aux--;
                             coluna_aux--;
                             ImprimirMatriz(matriz, tam_matriz);
@@ -300,10 +294,24 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         else{//é pq é um numero
                             linha_aux--;
                             coluna_aux--;
-                            MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                            if(matriz[linha_aux][coluna_aux]!="0"){
+                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                                mochila++;
+                                if(mochila==4){
+                                    if(vida<10){
+                                        int acao_aux;
+                                        acao_aux=1;
+                                        Vida(vida, acao_aux); 
+                                    }
+                                    mochila=0;
+                                }
+                                ImprimirMatriz(matriz, tam_matriz);
+                                cout << "\nMochila: " << mochila << endl;
+                            }
+                            /*MudaValorCaminho(matriz, linha_aux, coluna_aux);
                             mochila++;
                             ImprimirMatriz(matriz, tam_matriz);
-                            cout << "\nMochila: " << mochila << endl;
+                            cout << "\nMochila: " << mochila << endl;*/
                         }
                     }
                     acao = 0;
@@ -315,7 +323,6 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         if(matriz[linha_aux-1][coluna_aux+1] == "*"){
                             acao=-1;
                             Vida(vida, acao);
-                            //vida--;
                             linha_aux--;
                             coluna_aux++;
                             ImprimirMatriz(matriz, tam_matriz);
@@ -324,10 +331,24 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         else{ //é pq é um numero
                             linha_aux--;
                             coluna_aux++;
-                            MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                            if(matriz[linha_aux][coluna_aux]!="0"){
+                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                                mochila++;
+                                if(mochila==4){
+                                    if(vida<10){
+                                        int acao_aux;
+                                        acao_aux=1;
+                                        Vida(vida, acao_aux); 
+                                    }
+                                    mochila=0;
+                                }
+                                ImprimirMatriz(matriz, tam_matriz);
+                                cout << "\nMochila: " << mochila << endl;
+                            }
+                            /*MudaValorCaminho(matriz, linha_aux, coluna_aux);
                             mochila++;
                             ImprimirMatriz(matriz, tam_matriz);
-                            cout << "\nMochila: " << mochila << endl;
+                            cout << "\nMochila: " << mochila << endl;*/
                         }
                     }
                     acao = 0;
@@ -339,7 +360,6 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         if(matriz[linha_aux+1][coluna_aux-1] == "*"){
                             acao=-1;
                             Vida(vida, acao);
-                            //vida--;
                             linha_aux++;
                             coluna_aux--;
                             ImprimirMatriz(matriz, tam_matriz);
@@ -348,10 +368,24 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         else{ //é pq é um numero
                             linha_aux++;
                             coluna_aux--;
-                            MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                            if(matriz[linha_aux][coluna_aux]!="0"){
+                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                                mochila++;
+                                if(mochila==4){
+                                    if(vida<10){
+                                        int acao_aux;
+                                        acao_aux=1;
+                                        Vida(vida, acao_aux); 
+                                    }
+                                    mochila=0;
+                                }
+                                ImprimirMatriz(matriz, tam_matriz);
+                                cout << "\nMochila: " << mochila << endl;
+                            }
+                            /*MudaValorCaminho(matriz, linha_aux, coluna_aux);
                             mochila++;
                             ImprimirMatriz(matriz, tam_matriz);
-                            cout << "\nMochila: " << mochila << endl;
+                            cout << "\nMochila: " << mochila << endl;*/
                         }
                     }
                     acao = 0;
@@ -363,7 +397,6 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         if(matriz[linha_aux+1][coluna_aux+1] == "*"){
                             acao=-1;
                             Vida(vida, acao);
-                            //vida--;
                             linha_aux++;
                             coluna_aux++;
                             ImprimirMatriz(matriz, tam_matriz);
@@ -372,10 +405,24 @@ void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int
                         else{ //é pq é numero
                             linha_aux++;
                             coluna_aux++;
-                            MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                            if(matriz[linha_aux][coluna_aux]!="0"){
+                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
+                                mochila++;
+                                if(mochila==4){
+                                    if(vida<10){
+                                        int acao_aux;
+                                        acao_aux=1;
+                                        Vida(vida, acao_aux); 
+                                    }
+                                    mochila=0;
+                                }
+                                ImprimirMatriz(matriz, tam_matriz);
+                                cout << "\nMochila: " << mochila << endl;
+                            }
+                            /*MudaValorCaminho(matriz, linha_aux, coluna_aux);
                             mochila++;
                             ImprimirMatriz(matriz, tam_matriz);
-                            cout << "\nMochila: " << mochila << endl;
+                            cout << "\nMochila: " << mochila << endl;*/
                         }
                     }
                     acao = 0;
@@ -426,8 +473,6 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int& vida)
     int i=0, aux_linha=0, aux_coluna=0, acao=0;
     bool  auxVida = Vida(vida, acao);
 
-    
-
     string** matriz_aux=new string*[tam_matriz];
     for(int i = 0; i < tam_matriz; i++){
         matriz_aux[i]=new string[tam_matriz];
@@ -464,12 +509,23 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int& vida)
             aux_linha=0;
             
             //ImprimirMatriz(matriz_aux, tam_matriz);
-
-            PercorrerMatriz(matriz_aux, linha, coluna, tam_matriz, vida);
-            auxVida = Vida(vida, acao);
-            cout << "AUXX VIDAAAAAA1 " << auxVida << endl << endl;
-
+            if(matriz_aux[linha][coluna] == "#"){
+                while(matriz_aux[linha][coluna] == "#"){
+                    linha = rand()%tam_matriz;
+                    coluna = rand()%tam_matriz;
+                    cout << "Posição inicial mudada [" << linha << "]" << "[" << coluna << "]" <<endl;
+                }
+                    PercorrerMatriz(matriz_aux, linha, coluna, tam_matriz, vida);
+                    auxVida = Vida(vida, acao);
+                    PassaNovaMatrizParaArquivo(matriz_aux, nomeArquivo, tam_matriz);
+            }
+            else{
+                PercorrerMatriz(matriz_aux, linha, coluna, tam_matriz, vida);
+                auxVida = Vida(vida, acao);
+                PassaNovaMatrizParaArquivo(matriz_aux, nomeArquivo, tam_matriz);
+            }
             
+            //ImprimirMatriz(matriz_aux, tam_matriz);
              
 
             /*linha = rand()%tam_matriz;
@@ -507,15 +563,15 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int& vida)
 
             PercorrerMatriz(matriz_aux, linha, coluna, tam_matriz, vida);
             auxVida = Vida(vida, acao);
-            cout << "AUXX VIDAAAAAA " << auxVida << endl << endl;
-
+            PassaNovaMatrizParaArquivo(matriz_aux, nomeArquivo, tam_matriz);
+            i++;
             /*linha = rand()%tam_matriz;
             coluna = rand()%tam_matriz;
             cout << endl << endl << endl << endl << endl;
             cout << "Posição[" << linha << "]" << "[" << coluna << "]" <<endl;*/
         }
-        cout << endl << endl << endl << endl;
-        cout << "----------------------------------------------------------" << endl;
+        //cout << endl << endl << endl << endl;
+        //cout << "----------------------------------------------------------" << endl;
         ImprimirMatriz(matriz_aux, tam_matriz);
     }
 }
@@ -568,4 +624,17 @@ void MudaValorCaminho(string **matriz, int linha, int coluna){
     valorCaminho_str  = aux.str();
     aux.str("");
     matriz[linha][coluna]=valorCaminho_str;
+}
+
+void PassaNovaMatrizParaArquivo(string **matriz, string nomeArq, int tam_matriz){
+    ofstream arquivo_escrita;
+
+    arquivo_escrita.open(nomeArq, ios::out);
+        for (int i=0; i<tam_matriz; i++) {
+            for (int j=0; j<tam_matriz; j++) {
+                arquivo_escrita<< matriz[i][j] << " ";
+            }
+            arquivo_escrita<< endl;
+        }
+    arquivo_escrita.close();
 }

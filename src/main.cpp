@@ -8,7 +8,7 @@ int main(){
 	
 	short int tam_matriz, qtd_matriz;
 	//int i=0;
-	int linha=0, coluna=0, vida=10;
+	int linha=0, coluna=0, vida=6;
 	
 	tie(tam_matriz, qtd_matriz) = LePrimeraLinha();
 	cout << "Codigo Jullia" << endl;
