@@ -9,11 +9,12 @@ int main(){
 	short int tam_matriz, qtd_matriz;
 	//int i=0;
 	int linha=0, coluna=0, vida=6;
+	//bool caminho=true;
 	
 	tie(tam_matriz, qtd_matriz) = LePrimeraLinha();
 	cout << "Codigo Jullia" << endl;
 	cout << "Matriz [" << tam_matriz << "]" << "[" << tam_matriz << "]" <<endl;
-	cout << "Existe " << qtd_matriz << " matriz(ez) no arquivo" << endl; 
+	cout << "Existe " << qtd_matriz << " matriz(ez) no arquivo" << endl << endl; 
 
 	string** matriz=new string*[tam_matriz];
     for(int i = 0; i < tam_matriz; i++){
