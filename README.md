@@ -11,10 +11,10 @@ Atividade realizada no 3º periodo para a disciplina de Algoritmos e Estrutura d
 <strong>Main.cpp:</strong> É feito a chamada inicialmente de uma função que ira retornar o tamanho da matriz presente no arquivo input.data e quantas matriz possuem nesse arquivo, é feita tambem a chamada das duas funções principais do funcionamento do codigo, 'LerArquivo' e 'StartJogo', é nela em que todo nosso codigo sera executado.<br>
 <strong>Labirinto.hpp:</strong> Onde é criada todas as nossas funções que seram executadas no decorrer do algoritmo.<br>
 <strong>Labirinto.cpp:</strong> Onde é feita a estruturação de todas as funções criadas e onde sera desenvolvido todo o codigo.<br>
-<strong>Terminal:</strong> Aparece ao usuario, quantas casas foram percorridas durante a execução do codigo, quantos itens foram coletados, a quantidade de perigos enfrentados e quantas posiçoes nao foram acessadas durante o percurso gerado pelo codigo.
+<strong>Terminal:</strong> Aparece ao usuario, quantas casas foram percorridas durante a execução do codigo, quantos itens foram coletados, a quantidade de perigos enfrentados e quantas posiçoes nao foram acessadas durante o percurso gerado pelo codigo.<br>
 <strong>dataset/input.data:</strong> Arquivo contendo o tamanho da matriz, a quantidade matrizes, sendo ela(s) de numeros inteiros e dois tipos de caracteres, '*' e '#',  somente.
 <ul>
-  <li>Na primeira linha do arquivo é necessário ter o tamanho da matriz e a quantidade de matriz que irão compor esse arquivo, sendo implementado dessa maneira: '5 5 3' e a necessidade de possuir ao mínimo uma matriz de numeros inteiros entre 0 e 10 e somente dois tipos de caracteres ja especificados acima, do tamanho correspondente ao da primeira linha, para a boa execução do código</li>
+  <li>Na primeira linha do arquivo é necessário ter o tamanho da matriz e a quantidade de matriz que irão compor esse arquivo, sendo implementado dessa maneira: '5 5 3' e a necessidade de possuir ao mínimo uma matriz de numeros inteiros entre 0 e 9 e somente dois tipos de caracteres ja especificados acima, do tamanho correspondente ao da primeira linha, para a boa execução do código</li>
 </ul>
 
 # Resolução do problema 
