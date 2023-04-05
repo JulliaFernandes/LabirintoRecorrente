@@ -19,7 +19,19 @@ Atividade realizada no 3º periodo para a disciplina de Algoritmos e Estrutura d
 
 # Resolução do problema 
 As duas funções principais que faz o funcionamento do codigo sao: 'StartJogo' e 'PercorrerMatriz', são nelas que é feita toda a implementação do desenvolvimento do codigo, cumprimindo todas as codiçoes passadas pelo professor.<br>
+
+<strong>Explicação detalhada da função 'LeArquivo':</strong>
+
+<ul>
+<li>É feita a abertura do arquivo input.data, pois é nela que esta armazenado todas as nossas matrizes que usaremos durante todo o nosso jogo.</li>
+<li>O arquivo input.data é lido de maneira que a cada linha vazia vista, é sinal de que toda uma matriz foi percorrida e desse modo podemos salvar essa matriz lida em um arquivo que contera somente ela.</li>
+<li>Esse arquivo unico de cada matriz é feito na função 'CriandoArquivoParaCadaMatriz'(linha X) na qual cada arquivo recebera um nome diferente, basedo na sua matriz correspondente, ou seja, para a primeira matriz lida, o nome de seu arquivo sera: 'dataset/matriz1.data'</li>
+</ul>
+
+
+
 <strong>Explicação detalhada da função 'Startjogo':</strong>
+De maneira geral nessa função é feita a abertura do arquivo que contem a matriz a ser percorrida no momento, é chamado a função que ira percorrer a matriz e é onde é feito a analise o numero de vidas, se devemos ou não continuar no jogo e por fim é nela que nos teletrasportamos para a proxima matriz. 
 
 <ul>
 <li></li>
