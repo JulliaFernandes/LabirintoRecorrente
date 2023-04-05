@@ -26,7 +26,8 @@ As duas funções principais que faz o funcionamento do codigo sao: `StartJogo` 
 <li>É feita a abertura do arquivo input.data, pois é nela que esta armazenado todas as nossas matrizes que usaremos durante todo o nosso jogo.</li>
 <li>O arquivo input.data é lido de maneira que a cada linha vazia vista, é sinal de que toda uma matriz foi percorrida e desse modo podemos salvar essa matriz lida em um arquivo que contera somente ela.</li>
 <li>Esse arquivo unico de cada matriz é feito na função `CriandoArquivoParaCadaMatriz`(linha X) na qual cada arquivo recebera um nome diferente, basedo na sua matriz correspondente, ou seja, para a primeira matriz lida, o nome de seu arquivo sera: 'dataset/matriz1.data'</li>
-<li>Os nomes de arquivos criados sao todos salvos em um vetro global para sua utlização em outro desenvolvimento</li>
+<li>Os nomes de arquivos criados sao todos salvos em um vetor global para sua utlização em outra parte do codigo</li>
+  - Todos os arquivos de matrizes criados ficaram salvos na pasta dataset, que ao final do jogo todas elas seram excluidas para liberação de memoria.
 </ul>
 
 <div align="center">
@@ -39,26 +40,74 @@ De maneira geral nessa função é feita a abertura do arquivo que contem a matr
 
 <ul>
 <li>É pedido ao usuario que digite o numero da posição inical em que deseja começar o jogo</li>
-  - importante ressaltar que se a posição digitada pelo ususario for uma parede(#), a posição de inicio sera gerada aleatoriamente ate que seja uma posição aceita pelo programa, as exeções são: se forem paredes ou entao se for a ultima linha ou ultima coluna.   
-<li>É criado uma matriz de string auxiliar que sera nela que usaremos durante todo nosso codigo para armazenarmos as lidas em seus arquivo e usa-las para percorrer</li>
-<li>Depois de inicializado/tratado as execções se necessario, ja entramos em nosso looping iterativo(linha X), ele possi como condição de parada as vidas estarem a baixo de zero, pois assim significa que voce morree</li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
+  - importante ressaltar que se a posição digitada pelo ususario for uma parede(#), a posição de inicio sera gerada aleatoriamente ate que seja uma posição aceita pelo programa, as exeções são: se forem paredes ou entao se for a ultima linha ou ultima coluna, sendo as duas ultimas, as condiçoes de teletranspote de uma matriz para a outra.   
+<li>É criado uma matriz de string auxiliar que sera nela que usaremos durante todo nosso codigo para armazenarmos as matrizes lidas em seus arquivo e usa-las para percorrer</li>
+<li>Uma variavel recebera os nomes, um por vez e em sequencia, do vetor que armazena o nome de todos os arquivos criados para as matrizes, pois é essa variavel que fara o controle de qual arquivo de matriz estamos e qual sera a matriz alterada durante o percurso.</li>
+<li>É visto entao se a posição digitada pelo usuario é uma parede ou as condições de teletransporte para a outra matriz, pois se for ela nao devera ser o começo de nosso jogo, se em caso afirmativo essa posição é gerada randomicamente pelo programa</li>
+<li>Se todos os criterios acima estiverem de acordo, começamos o jogo, chamando a função `PercorrerMatriz`</li>
+<li>Apos feito todo o percurso de nossa matriz, a mesma se encontra diferente de antes logo ela deve ser passada para o seu arquivo ja modificada, para isso chamamos a função `PassaNovaMatrizParaArquivo`</li>
+<li> Logo apos a chamada da função de percorrer é visto tambem se nossa vida acabou, pois se sim, devemos parar o codigo e informar ao usuario que o jogo foi finalizado e que ele chegou ao nivel zero de vidas.</li>
+ <li>Por fim nossos arquivos sao atualizados para o proximo do vetor e faremos os mesmos passos se tudo continuar sendo cumprido.</li>
+<li>Essa iteração ocorre enquanto tivermos vida, ou se o todo o caminho feito possuir itens a ser coletados.</li><br>
+  - <strong>Importante:</strong> a decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo input.data, se chegado a ultima matriz do arquivo voltamos a primeira matriz. 
 </ul>
 
-<strong>Explicação detalhada da função 'PercorrerMatriz':</strong>
+<strong>Explicação detalhada da função 'PercorrerMatriz':</strong><br>
+Essa função tem como criterio de decisão qual direção o usuario ira, feita por switch's, sendo cada 'case' uma direção possivel.
 <ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
+<li>Assim que inicializado essa função, a posição em que o personagem se encontra ja sofrerá mudanças, ate mesmo a posição inical em que o usuario começa o jogo.</li>
+<li>Ela é realizada por um loop que somente se atingirmos a posicao que nos levara a outra matriz ou entao se nossa vida chegar a zero, ele é parado. (Os criterios de teletransporte ja foram explicados acima)</li>
+<li>É gerado um numero randomico entre 0 a 7 e que cada um representara a decisao de direção a ser seguida.</li>
+<li>É tratado os casos de extremidades da matriz, quando gerado um numero em que a posição nao é possivel ser seguida, é gerado um outro numero aleatorio ate que seja possivel o personagem se mover.</li>
+<li>É visto se a posição em que o personagem irá é um perigo(*) ou um item(numeros de 0 a 9), se em caso de perigo, o personagem sofre um dano em sua vida e perde uma, se em caso de item, ele recebe um item que ira para sua mochila e o numero naquela posição diminui em 1 unidade, ate chegar em zero.</li>
+   - sempre que sua mochila chegue a 4 itens, seus itens sao trocados em 1 vida e é zerada sua mochila novamente, para os casos em que sua vida ja esta totalmente cheia, nada ocorre em sua vida mas sua mochila sera zerada.
 </ul>
+
+<p align="center">
+<strong><em>Direçãoes possiveis em cada 'case' presente no switch </em></strong>
+</p>
+
+<table border="1" align="center">
+  <tr>
+      <td><strong>Case</strong></td>
+      <td><strong>Direção</strong></td>
+  </tr>
+  <tr>
+      <td>0</td>
+      <td>Direta</td>
+  </tr>
+  <tr>
+      <td>1</td>
+      <td>Esquerda</td>
+  </tr>
+  <tr>
+      <td>2</td>
+      <td>Cima</td>
+  </tr>
+  <tr>
+      <td>3</td>
+      <td>Baixo</td>
+  </tr>
+  <tr>
+      <td>4</td>
+      <td>Diagonal esq. sup.</td>
+  </tr>
+  <tr>
+      <td>5</td>
+      <td>Diagonal dir. sup.</td>
+  </tr>
+  <tr>
+      <td>6</td>
+      <td>Diagonal esq. inf.</td>
+  </tr>
+  <tr>
+      <td>7</td>
+      <td>Diagonal dir. inf.</td>
+  </tr>
+</table>
+
+# Exemplificação
+
 
 # Compilação e Execução
 
