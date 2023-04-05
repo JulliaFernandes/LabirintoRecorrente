@@ -25,7 +25,7 @@ As duas funções principais que faz o funcionamento do codigo sao: `StartJogo` 
 <ul>
 <li>É feita a abertura do arquivo input.data, pois é nela que esta armazenado todas as nossas matrizes que usaremos durante todo o nosso jogo.</li>
 <li>O arquivo input.data é lido de maneira que a cada linha vazia vista, é sinal de que toda uma matriz foi percorrida e desse modo podemos salvar essa matriz lida em um arquivo que contera somente ela.</li>
-<li>Esse arquivo unico de cada matriz é feito na função `CriandoArquivoParaCadaMatriz`(linha X) na qual cada arquivo recebera um nome diferente, basedo na sua matriz correspondente, ou seja, para a primeira matriz lida, o nome de seu arquivo sera: 'dataset/matriz1.data'</li>
+<li>Esse arquivo unico de cada matriz é feito na função  'CriandoArquivoParaCadaMatriz'(linha X) na qual cada arquivo recebera um nome diferente, basedo na sua matriz correspondente, ou seja, para a primeira matriz lida, o nome de seu arquivo sera: 'dataset/matriz1.data'</li>
 <li>Os nomes de arquivos criados sao todos salvos em um vetor global para sua utlização em outra parte do codigo</li>
   - Todos os arquivos de matrizes criados ficaram salvos na pasta dataset, que ao final do jogo todas elas seram excluidas para liberação de memoria.
 </ul>
@@ -41,14 +41,14 @@ De maneira geral nessa função é feita a abertura do arquivo que contem a matr
 <ul>
 <li>É pedido ao usuario que digite o numero da posição inical em que deseja começar o jogo</li>
   - importante ressaltar que se a posição digitada pelo ususario for uma parede(#), a posição de inicio sera gerada aleatoriamente ate que seja uma posição aceita pelo programa, as exeções são: se forem paredes ou entao se for a ultima linha ou ultima coluna, sendo as duas ultimas, as condiçoes de teletranspote de uma matriz para a outra.   
-<li>É criado uma matriz de string auxiliar que sera nela que usaremos durante todo nosso codigo para armazenarmos as matrizes lidas em seus arquivo e usa-las para percorrer</li>
+<li>É criado uma matriz de string auxiliar que sera ela que usaremos durante todo nosso codigo para armazenarmos as matrizes lidas em seus arquivo e usa-las para percorrer</li>
 <li>Uma variavel recebera os nomes, um por vez e em sequencia, do vetor que armazena o nome de todos os arquivos criados para as matrizes, pois é essa variavel que fara o controle de qual arquivo de matriz estamos e qual sera a matriz alterada durante o percurso.</li>
-<li>É visto entao se a posição digitada pelo usuario é uma parede ou as condições de teletransporte para a outra matriz, pois se for ela nao devera ser o começo de nosso jogo, se em caso afirmativo essa posição é gerada randomicamente pelo programa</li>
+<li>É visto entao se a posição digitada pelo usuario é uma parede ou são as condições de teletransporte para a outra matriz, pois se for o jogo nao deverá começar ate que se encontre em uma posição adequada dessa maneira a posição inical é gerada randomicamente pelo programa.</li>
 <li>Se todos os criterios acima estiverem de acordo, começamos o jogo, chamando a função `PercorrerMatriz`</li>
 <li>Apos feito todo o percurso de nossa matriz, a mesma se encontra diferente de antes logo ela deve ser passada para o seu arquivo ja modificada, para isso chamamos a função `PassaNovaMatrizParaArquivo`</li>
 <li> Logo apos a chamada da função de percorrer é visto tambem se nossa vida acabou, pois se sim, devemos parar o codigo e informar ao usuario que o jogo foi finalizado e que ele chegou ao nivel zero de vidas.</li>
- <li>Por fim nossos arquivos sao atualizados para o proximo do vetor e faremos os mesmos passos se tudo continuar sendo cumprido.</li>
-<li>Essa iteração ocorre enquanto tivermos vida, ou se o todo o caminho feito possuir itens a ser coletados.</li><br>
+ <li>Por fim a função é atualizada para proseguirmos para o proximo arquivo e faremos os mesmos passos se tudo continuar sendo cumprido.</li>
+<li>Essa iteração ocorre enquanto tivermos vida, ou se o todo o caminho feito ainda possuir itens a serem coletados.</li><br>
   - <strong>Importante:</strong> a decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo input.data, se chegado a ultima matriz do arquivo voltamos a primeira matriz. 
 </ul>
 
@@ -107,6 +107,20 @@ Essa função tem como criterio de decisão qual direção o usuario ira, feita 
 </table>
 
 # Exemplificação
+Nesse gif é possivel observar o funcionamento do codigo de uma maneira mais visual.<br>
+Acontecimentos:
+<ul>
+<li>Matriz inicial sem mudanças e o nome de seu arquivo</li>
+<li>Posição gerada pelo switch impossivel de ir devido a parede(#);</li>
+<li>Perde vida ao enfrentar um perigo;</li>
+<li>Mochila aumentando de item e as posições diminuindo;</li>
+<li>Mochila no maximo e fazendo a trocando por vida, logo apos esvaziando a mochila;</li>
+<li>Chegando a extremidade da matriz e finalizando a função ja que irá se teletranportar a outra matriz</li>
+</ul>
+
+<p align="center">
+<img src="/imgs/gif_maze.gif" alt="Gif Maze">
+</p>
 
 
 # Compilação e Execução
