@@ -349,7 +349,7 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int &vida)
     while (auxVida == true)
     {
         cout << "aaaaa" << endl; // ainda nao morri e ainda tem lugar pra passar
-        if(passouTodasMatrizes && comeco){ //se passou em todas as matrizes se passou na posição inicial
+        if(passouTodasMatrizes && comeco){ //se passou em todas as matrizes e se passou na posição inicial
             if(CaminhoEhVazio==true){
                 cout << "CAMINHO ZERADO. VOCE CHEGOU AO FINAL DO JOGO, PARABENS :) !!" << endl;
                 break;
