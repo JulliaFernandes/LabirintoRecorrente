@@ -18,24 +18,30 @@ Atividade realizada no 3º periodo para a disciplina de Algoritmos e Estrutura d
 </ul>
 
 # Resolução do problema 
-As duas funções principais que faz o funcionamento do codigo sao: 'StartJogo' e 'PercorrerMatriz', são nelas que é feita toda a implementação do desenvolvimento do codigo, cumprimindo todas as codiçoes passadas pelo professor.<br>
+As duas funções principais que faz o funcionamento do codigo sao: `StartJogo` e `PercorrerMatriz`, são nelas que é feita toda a implementação do desenvolvimento do codigo, cumprimindo todas as codiçoes passadas pelo professor.<br>
 
-<strong>Explicação detalhada da função 'LeArquivo':</strong>
+<strong>Explicação detalhada da função 'LerArquivo':</strong>
 
 <ul>
 <li>É feita a abertura do arquivo input.data, pois é nela que esta armazenado todas as nossas matrizes que usaremos durante todo o nosso jogo.</li>
 <li>O arquivo input.data é lido de maneira que a cada linha vazia vista, é sinal de que toda uma matriz foi percorrida e desse modo podemos salvar essa matriz lida em um arquivo que contera somente ela.</li>
-<li>Esse arquivo unico de cada matriz é feito na função 'CriandoArquivoParaCadaMatriz'(linha X) na qual cada arquivo recebera um nome diferente, basedo na sua matriz correspondente, ou seja, para a primeira matriz lida, o nome de seu arquivo sera: 'dataset/matriz1.data'</li>
+<li>Esse arquivo unico de cada matriz é feito na função `CriandoArquivoParaCadaMatriz`(linha X) na qual cada arquivo recebera um nome diferente, basedo na sua matriz correspondente, ou seja, para a primeira matriz lida, o nome de seu arquivo sera: 'dataset/matriz1.data'</li>
+<li>Os nomes de arquivos criados sao todos salvos em um vetro global para sua utlização em outro desenvolvimento</li>
 </ul>
 
+<div align="center">
+  <img src="/imgs/ArquivosCriados_Exemplo.PNG" alt="Pasta Dataset">
+  <p align="center"><em> Exemplificação pasta dataset </em></p>
+</div>
 
-
-<strong>Explicação detalhada da função 'Startjogo':</strong>
+<strong>Explicação detalhada da função 'Startjogo':</strong><br>
 De maneira geral nessa função é feita a abertura do arquivo que contem a matriz a ser percorrida no momento, é chamado a função que ira percorrer a matriz e é onde é feito a analise o numero de vidas, se devemos ou não continuar no jogo e por fim é nela que nos teletrasportamos para a proxima matriz. 
 
 <ul>
-<li></li>
-<li></li>
+<li>É pedido ao usuario que digite o numero da posição inical em que deseja começar o jogo</li>
+  - importante ressaltar que se a posição digitada pelo ususario for uma parede(#), a posição de inicio sera gerada aleatoriamente ate que seja uma posição aceita pelo programa, as exeções são: se forem paredes ou entao se for a ultima linha ou ultima coluna.   
+<li>É criado uma matriz de string auxiliar que sera nela que usaremos durante todo nosso codigo para armazenarmos as lidas em seus arquivo e usa-las para percorrer</li>
+<li>Depois de inicializado/tratado as execções se necessario, ja entramos em nosso looping iterativo(linha X), ele possi como condição de parada as vidas estarem a baixo de zero, pois assim significa que voce morree</li>
 <li></li>
 <li></li>
 <li></li>
