@@ -4,22 +4,20 @@ using namespace std;
 
 vector<string> nomesDosArquivos;
 bool CaminhoEhVazio=true;
-bool comeco=true;
+bool comeco=false;
 bool passouTodasMatrizes=false;
 int inicioLinha, inicioColuna;
+int contVezesEntradas=0;
 
 tuple<int, int> PosicaoInicial(int linha, int coluna, int tam_matriz)
 {
-    cout << "Qual posição deseja começar: " << endl
-         << ">";
+    cout << "Qual posição deseja começar: " << endl << ">";
     cin >> linha;
     cout << ">";
     cin >> coluna;
-    while (coluna >= tam_matriz || coluna < 0 || linha >= tam_matriz || linha < 0)
-    {
+    while (coluna >= tam_matriz || coluna < 0 || linha >= tam_matriz || linha < 0){
         cout << "Posição invalida. Digite somente valores entre 0 e " << tam_matriz - 1 << endl;
-        cout << "Qual posição deseja começar: " << endl
-             << ">";
+        cout << "Qual posição deseja começar: " << endl << ">";
         cin >> linha;
         cout << ">";
         cin >> coluna;
@@ -35,26 +33,19 @@ tuple<int, int> LePrimeraLinha()
     int aux = 0, tam = 0, cont = 0, qtdMatriz, cont2 = 0;
 
     arquivo.open("dataset/input.data", ios::in);
-    // while(cont == 0){
-    while (getline(arquivo, linha, '\n'))
-    {
-        if (cont == 0)
-        {
+    while (getline(arquivo, linha, '\n')){
+        if (cont == 0){
             stringstream aux_str(linha);
-            while (getline(aux_str, elemento, ' '))
-            {
-                if (aux == 2)
-                {
-                    if (cont2 == 0)
-                    {
+            while (getline(aux_str, elemento, ' ')){
+                if (aux == 2){
+                    if (cont2 == 0){
                         qtdMatriz_str = elemento;
                         qtdMatriz = atoi(qtdMatriz_str.c_str());
                         cout << ">QTD MATRIZ: " << qtdMatriz << endl;
                         cont2++;
                     }
                 }
-                else
-                {
+                else{
                     valor_str = elemento;
                     tam = atoi(valor_str.c_str());
                     aux++;
@@ -64,18 +55,14 @@ tuple<int, int> LePrimeraLinha()
             cont++;
         }
     }
-    // }
     arquivo.close();
     return make_tuple(tam, qtdMatriz);
 }
 
 bool linhaVazia(const string &linha)
 {
-    for (char c : linha)
-    {
-        if (!isspace(c))
-        {
-            // Se o caractere não for espaço em branco, a linha não está vazia
+    for (char c : linha){
+        if (!isspace(c)){ // Se o caractere não for espaço em branco, a linha não está vazia
             return false;
         }
     }
@@ -96,18 +83,13 @@ void LerArquivo(string **matriz, int tam_matriz, int qtd_matriz)
 
     arquivo.open("dataset/input.data", ios::in);
 
-    while (!arquivo.eof())
-    {
-        while (getline(arquivo, linha_arq, '\n'))
-        {
-            if (aux_tam == 0)
-            {
+    while (!arquivo.eof()){
+        while (getline(arquivo, linha_arq, '\n')){
+            if (aux_tam == 0){
                 aux_tam++;
             }
-            else
-            {
-                if (linhaVazia(linha_arq))
-                {
+            else{
+                if (linhaVazia(linha_arq)){
                     // cout << "---------------------------------------------";
                     // cout << "\n\t---Nova Matriz---" << endl;
                     CriandoArquivoParaCadaMatriz(matriz, tam_matriz, qtd_matriz, i);
@@ -115,8 +97,7 @@ void LerArquivo(string **matriz, int tam_matriz, int qtd_matriz)
                     aux_coluna = 0;
                     aux_linha = 0;
                 }
-                else
-                {
+                else{
                     // está criando um fluxo de caracteres para que a função getline possa ler e manipular os dados
                     stringstream aux(linha_arq);
 
@@ -140,440 +121,169 @@ void LerArquivo(string **matriz, int tam_matriz, int qtd_matriz)
         }
     }
     arquivo.close();
-
-    // cout << "---------------------------------------------";
-    // cout << "\n\taa---Nova Matriz---" << endl;
     CriandoArquivoParaCadaMatriz(matriz, tam_matriz, qtd_matriz, i);
-    // ImprimirMatriz(matriz, tam_matriz);
 }
 
 void ImprimirMatriz(string **matriz, int tam_matriz)
 {
     cout << endl;
-    for (int i = 0; i < tam_matriz; i++)
-    {
-        for (int j = 0; j < tam_matriz; j++)
-        {
+    for (int i = 0; i < tam_matriz; i++){
+        for (int j = 0; j < tam_matriz; j++){
             cout << matriz[i][j] << " ";
         }
         cout << endl;
     }
 }
 
-void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int &vida, int &totalCasas, int &totalItens, int &totalPerigo, int &qtdCasasNaoAndadas, string Nome1Arquivo, int& mochila)
+void PercorrerMatriz(string **matriz, int linha, int coluna, int tam_matriz, int &vida, int &totalCasas, int &totalItens, int &totalPerigo, string Nome1Arquivo, int& mochila, SalvaCaminho& caminho)
 {
     srand(42);
 
     int linha_aux = linha, coluna_aux = coluna;
-    int acao = 0, i=0, contVezesEntradas=0;
+    int acao = 0, i=0;
+    //int contVezesEntradas=0;
     bool auxVida = Vida(vida, acao);
-    //string ArquivoPrimeiro = nomesDosArquivos[i];
-    // caminho=false;
-    // bool auxCaminho=false;
+    int acaoLinha=0, acaoColuna=0;
+    //caminho.caminho.push_back({1,0});
 
-    // cout << "\n\t---Matriz Inicial---" << endl;
-    // ImprimirMatriz(matriz, tam_matriz);
-    // cout << endl;
+    if(contVezesEntradas!=0){
+        if(Nome1Arquivo == nomesDosArquivos[i] && linha_aux == inicioLinha && coluna_aux == inicioColuna){
+            comeco=true;
+            cout << "4444444444444444444444" << endl;
+            //break;
+        }
+    }
 
+    MudaPosicaoAtual(matriz, tam_matriz, linha_aux, coluna_aux, acaoLinha, acaoColuna, vida, totalCasas, totalItens, totalPerigo, mochila, caminho, Nome1Arquivo);
+    //cout << "\n\n--------CONTVEZESENTRADAS: " << contVezesEntradas << endl << endl;
     while (linha_aux < tam_matriz && coluna_aux < tam_matriz && auxVida != false){
         //comeco=false;
         cout << ">>Posição atual[" << linha_aux << "]" << "[" << coluna_aux << "]" << endl;
         if (linha_aux != tam_matriz - 1 && coluna_aux != tam_matriz - 1){   
-            if(contVezesEntradas!=0){
+            /* if(contVezesEntradas!=0){
                 if(Nome1Arquivo == nomesDosArquivos[i] && linha_aux == inicioLinha && coluna_aux == inicioColuna){
                     comeco=true;
-                    cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" << endl;
+                    cout << "4444444444444444444444" << endl;
+                    break;
                 }
-            }
-            contVezesEntradas++;
+            } */
+            //contVezesEntradas++;
             int direcaoAleatoria = rand() % 8;
             cout << "Numero aleatorio: " << direcaoAleatoria << endl << endl;
 
             switch (direcaoAleatoria){
                 case 0: // irei para direita;
                     if(coluna_aux < tam_matriz - 1 && matriz[linha_aux][coluna_aux + 1] != "#"){
-                        if (matriz[linha_aux][coluna_aux + 1] == "*"){
-                            coluna_aux++;
-                            ImprimirMatriz(matriz, tam_matriz);
-                            acao = -1;
-                            Vida(vida, acao);
-                            cout << "Vida: " << vida << endl << endl;
-                            TotalDePerigosEnfrentados(totalPerigo);
-                            CasasPercorridasAoTodo(totalCasas);
-                        }
-                        else{ // é pq é um numero
-                            coluna_aux++;
-                            CasasPercorridasAoTodo(totalCasas);
-                            if (matriz[linha_aux][coluna_aux] != "0"){
-                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
-                                mochila++;
-                                TotalDeItensConsumidos(totalItens);
-                                CaminhoEhVazio=false;
-                                if (mochila == 4){
-                                    if (vida < 10){
-                                        cout << "\n>Mochila: " << mochila << endl;
-                                        cout << "Mochila atingiu seu limite, voce ganhou uma vida" << endl;
-                                        int acao_aux;
-                                        acao_aux = 1;
-                                        cout << "vida antes: " << vida << endl;
-                                        Vida(vida, acao_aux);
-                                        cout << "vida depois: " << vida << endl;
-                                    }
-                                    mochila = 0;
-                                }
-                                ImprimirMatriz(matriz, tam_matriz);
-                                cout << "Mochila: " << mochila << endl << endl;
-                            }
-                            else
-                            { // o valor nessa casa é igual de zero
-                                
-                            }
-                        }
-                        CasasNaoPercorridas(qtdCasasNaoAndadas);
+                        acaoLinha=0;
+                        acaoColuna=1;
+                        MudaPosicaoAtual(matriz, tam_matriz, linha_aux, coluna_aux, acaoLinha, acaoColuna, vida, totalCasas, totalItens, totalPerigo, mochila, caminho, Nome1Arquivo);
                     }
                     acao = 0;
                     auxVida = Vida(vida, acao);
+                        /* CaminhoFoiPercorrido(caminho, linha_aux, coluna_aux, Nome1Arquivo);
+                        cout << "1TAM caminho: " << caminho.caminho.size() << endl << endl; */
                     // cout << "----------------------------VALOR BOLL CAMINHOVAZIO: " << caminhoVazio << endl;
                     break;
 
                 case 1: // irei para a esquerda
                     if (coluna_aux > 0 && matriz[linha_aux][coluna_aux - 1] != "#"){
-                        if (matriz[linha_aux][coluna_aux - 1] == "*"){
-                            coluna_aux--;
-                            ImprimirMatriz(matriz, tam_matriz);
-                            acao = -1;
-                            Vida(vida, acao);
-                            cout << "Vida: " << vida << endl << endl;
-                            TotalDePerigosEnfrentados(totalPerigo);
-                            CasasPercorridasAoTodo(totalCasas);
-                        }
-                        else{ // é pq é um numero
-                            coluna_aux--;
-                            CasasPercorridasAoTodo(totalCasas);
-                            if (matriz[linha_aux][coluna_aux] != "0"){
-                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
-                                mochila++;
-                                TotalDeItensConsumidos(totalItens);
-                                CaminhoEhVazio=false;
-                                if (mochila == 4){
-                                    if (vida < 10){
-                                        cout << "\n>Mochila: " << mochila << endl;
-                                        cout << "Mochila atingiu seu limite, ganhou uma vida" << endl;
-                                        int acao_aux;
-                                        acao_aux = 1;
-                                        cout << "vida antes: " << vida << endl;
-                                        Vida(vida, acao_aux);
-                                        cout << "vida depois: " << vida << endl;
-                                    }
-                                    mochila = 0;
-                                }
-                                ImprimirMatriz(matriz, tam_matriz);
-                                cout << "Mochila: " << mochila << endl << endl;
-                            }
-                            else
-                            {
-                            }
-                        }
-                        CasasNaoPercorridas(qtdCasasNaoAndadas);
+                        acaoLinha=0;
+                        acaoColuna=-1;
+                        MudaPosicaoAtual(matriz, tam_matriz, linha_aux, coluna_aux, acaoLinha, acaoColuna, vida, totalCasas, totalItens, totalPerigo, mochila, caminho, Nome1Arquivo);
                     }
                     acao = 0;
                     auxVida = Vida(vida, acao);
+                        /* CaminhoFoiPercorrido(caminho, linha_aux, coluna_aux, Nome1Arquivo);
+                        cout << "1TAM caminho: " << caminho.caminho.size() << endl << endl; */
                     break;
 
                 case 2: // irei para cima
                     if (linha_aux > 0 && matriz[linha_aux - 1][coluna_aux] != "#"){
-                        if (matriz[linha_aux - 1][coluna_aux] == "*"){
-                            acao = -1;
-                            Vida(vida, acao);
-                            TotalDePerigosEnfrentados(totalPerigo);
-                            linha_aux--;
-                            ImprimirMatriz(matriz, tam_matriz);
-                            cout << "Vida: " << vida << endl
-                                << endl;
-                            CasasPercorridasAoTodo(totalCasas);
-                        }
-                        else{ // é pq é um numero
-                            linha_aux--;
-                            CasasPercorridasAoTodo(totalCasas);
-                            if (matriz[linha_aux][coluna_aux] != "0"){
-                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
-                                mochila++;
-                                TotalDeItensConsumidos(totalItens);
-                                CaminhoEhVazio=false;
-                                if (mochila == 4){
-                                    if (vida < 10){
-                                        cout << "\n>Mochila: " << mochila << endl;
-                                        cout << "Mochila atingiu seu limite, ganhou uma vida" << endl;
-                                        int acao_aux;
-                                        acao_aux = 1;
-                                        cout << "vida antes: " << vida << endl;
-                                        Vida(vida, acao_aux);
-                                        cout << "vida depois: " << vida << endl;
-                                    }
-                                    mochila = 0;
-                                }
-                                ImprimirMatriz(matriz, tam_matriz);
-                                cout << "Mochila: " << mochila << endl
-                                    << endl;
-                            }
-                            else
-                            {
-                            }
-                        }
-                        CasasNaoPercorridas(qtdCasasNaoAndadas);
+                        acaoLinha=-1;
+                        acaoColuna=0;
+                        MudaPosicaoAtual(matriz, tam_matriz, linha_aux, coluna_aux, acaoLinha, acaoColuna, vida, totalCasas, totalItens, totalPerigo, mochila, caminho, Nome1Arquivo);             
                     }
                     acao = 0;
                     auxVida = Vida(vida, acao);
+                        /* CaminhoFoiPercorrido(caminho, linha_aux, coluna_aux, Nome1Arquivo);
+                        cout << "1TAM caminho: " << caminho.caminho.size() << endl << endl; */
                     break;
 
                 case 3: // irei para baixo
                     if (linha_aux < tam_matriz - 1 && matriz[linha_aux + 1][coluna_aux] != "#"){
-                        if (matriz[linha_aux + 1][coluna_aux] == "*"){
-                            acao = -1;
-                            Vida(vida, acao);
-                            TotalDePerigosEnfrentados(totalPerigo);
-                            linha_aux++;
-                            ImprimirMatriz(matriz, tam_matriz);
-                            cout << "Vida: " << vida << endl
-                                << endl;
-                            CasasPercorridasAoTodo(totalCasas);
-                        }
-                        else{ // é pq é numero
-                            linha_aux++;
-                            CasasPercorridasAoTodo(totalCasas);
-                            if (matriz[linha_aux][coluna_aux] != "0"){
-                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
-                                mochila++;
-                                TotalDeItensConsumidos(totalItens);
-                                CaminhoEhVazio=false;
-                                if (mochila == 4){
-                                    if (vida < 10){
-                                        cout << "\n>Mochila: " << mochila << endl;
-                                        cout << "Mochila atingiu seu limite, ganhou uma vida" << endl;
-                                        int acao_aux;
-                                        acao_aux = 1;
-                                        cout << "vida antes: " << vida << endl;
-                                        Vida(vida, acao_aux);
-                                        cout << "vida depois: " << vida << endl;
-                                    }
-                                    mochila = 0;
-                                }
-                                ImprimirMatriz(matriz, tam_matriz);
-                                cout << "Mochila: " << mochila << endl
-                                    << endl;
-                            }
-                            else
-                            {
-                            }
-                        }
-                        CasasNaoPercorridas(qtdCasasNaoAndadas);
+                        acaoLinha=1;
+                        acaoColuna=0;
+                        MudaPosicaoAtual(matriz, tam_matriz, linha_aux, coluna_aux, acaoLinha, acaoColuna, vida, totalCasas, totalItens, totalPerigo, mochila, caminho, Nome1Arquivo);
                     }
                     acao = 0;
                     auxVida = Vida(vida, acao);
+                        /* CaminhoFoiPercorrido(caminho, linha_aux, coluna_aux, Nome1Arquivo);
+                        cout << "1TAM caminho: " << caminho.caminho.size() << endl << endl; */
                     break;
 
                 case 4: // irei para diagonal-esquerda-superior
                     if (linha_aux != 0 && coluna_aux != 0 && matriz[linha_aux - 1][coluna_aux - 1] != "#"){
-                        if (matriz[linha_aux - 1][coluna_aux - 1] == "*"){
-                            acao = -1;
-                            Vida(vida, acao);
-                            TotalDePerigosEnfrentados(totalPerigo);
-                            linha_aux--;
-                            coluna_aux--;
-                            ImprimirMatriz(matriz, tam_matriz);
-                            cout << "Vida: " << vida << endl
-                                << endl;
-                            CasasPercorridasAoTodo(totalCasas);
-                        }
-                        else{ // é pq é um numero
-                            linha_aux--;
-                            coluna_aux--;
-                            CasasPercorridasAoTodo(totalCasas);
-                            if (matriz[linha_aux][coluna_aux] != "0"){
-                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
-                                mochila++;
-                                TotalDeItensConsumidos(totalItens);
-                                CaminhoEhVazio=false;
-                                if (mochila == 4){
-                                    if (vida < 10){
-                                        cout << "\n>Mochila: " << mochila << endl;
-                                        cout << "Mochila atingiu seu limite, ganhou uma vida" << endl;
-                                        int acao_aux;
-                                        acao_aux = 1;
-                                        cout << "vida antes: " << vida << endl;
-                                        Vida(vida, acao_aux);
-                                        cout << "vida depois: " << vida << endl;
-                                    }
-                                    mochila = 0;
-                                }
-                                ImprimirMatriz(matriz, tam_matriz);
-                                cout << "Mochila: " << mochila << endl
-                                    << endl;
-                            }
-                            else
-                            {
-                            }
-                        }
-                        CasasNaoPercorridas(qtdCasasNaoAndadas);
+                        acaoLinha=-1;
+                        acaoColuna=-1;
+                        MudaPosicaoAtual(matriz, tam_matriz, linha_aux, coluna_aux, acaoLinha, acaoColuna, vida, totalCasas, totalItens, totalPerigo, mochila, caminho, Nome1Arquivo);
                     }
                     acao = 0;
                     auxVida = Vida(vida, acao);
+                        /* CaminhoFoiPercorrido(caminho, linha_aux, coluna_aux, Nome1Arquivo);
+                        cout << "1TAM caminho: " << caminho.caminho.size() << endl << endl; */
                     break;
 
                 case 5: // irei para a diagonal-direita-superior
                     if (linha_aux != 0 && coluna_aux != tam_matriz - 1 && matriz[linha_aux - 1][coluna_aux + 1] != "#"){
-                        if (matriz[linha_aux - 1][coluna_aux + 1] == "*"){
-                            acao = -1;
-                            Vida(vida, acao);
-                            TotalDePerigosEnfrentados(totalPerigo);
-                            linha_aux--;
-                            coluna_aux++;
-                            ImprimirMatriz(matriz, tam_matriz);
-                            cout << "Vida: " << vida << endl
-                                << endl;
-                            CasasPercorridasAoTodo(totalCasas);
-                        }
-                        else{ // é pq é um numero
-                            linha_aux--;
-                            coluna_aux++;
-                            CasasPercorridasAoTodo(totalCasas);
-                            if (matriz[linha_aux][coluna_aux] != "0"){
-                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
-                                mochila++;
-                                TotalDeItensConsumidos(totalItens);
-                                CaminhoEhVazio=false;
-                                if (mochila == 4){
-                                    if (vida < 10){
-                                        cout << "\n>Mochila: " << mochila << endl;
-                                        cout << "Mochila atingiu seu limite, ganhou uma vida" << endl;
-                                        int acao_aux;
-                                        acao_aux = 1;
-                                        cout << "vida antes: " << vida << endl;
-                                        Vida(vida, acao_aux);
-                                        cout << "vida depois: " << vida << endl;
-                                    }
-                                    mochila = 0;
-                                }
-                                ImprimirMatriz(matriz, tam_matriz);
-                                cout << "Mochila: " << mochila << endl
-                                    << endl;
-                            }
-                            else
-                            {
-                            }
-                        }
-                        CasasNaoPercorridas(qtdCasasNaoAndadas);
+                        acaoLinha=-1;
+                        acaoColuna=1;
+                        MudaPosicaoAtual(matriz, tam_matriz, linha_aux, coluna_aux, acaoLinha, acaoColuna, vida, totalCasas, totalItens, totalPerigo, mochila, caminho, Nome1Arquivo);
                     }
                     acao = 0;
                     auxVida = Vida(vida, acao);
+                        /* CaminhoFoiPercorrido(caminho, linha_aux, coluna_aux, Nome1Arquivo);
+                        cout << "1TAM caminho: " << caminho.caminho.size() << endl << endl; */
+                    
                     break;
 
                 case 6: // irei para a diagonal-esquerda-inferior
                     if (linha_aux != tam_matriz - 1 && coluna_aux != 0 && matriz[linha_aux + 1][coluna_aux - 1] != "#"){
-                        if (matriz[linha_aux + 1][coluna_aux - 1] == "*"){
-                            acao = -1;
-                            Vida(vida, acao);
-                            TotalDePerigosEnfrentados(totalPerigo);
-                            linha_aux++;
-                            coluna_aux--;
-                            ImprimirMatriz(matriz, tam_matriz);
-                            cout << "Vida: " << vida << endl
-                                << endl;
-                            CasasPercorridasAoTodo(totalCasas);
-                        }
-                        else{ // é pq é um numero
-                            linha_aux++;
-                            coluna_aux--;
-                            CasasPercorridasAoTodo(totalCasas);
-                            if (matriz[linha_aux][coluna_aux] != "0"){
-                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
-                                mochila++;
-                                TotalDeItensConsumidos(totalItens);
-                                CaminhoEhVazio=false;
-                                if (mochila == 4){
-                                    if (vida < 10){
-                                        cout << "\n>Mochila: " << mochila << endl;
-                                        cout << "Mochila atingiu seu limite, ganhou uma vida" << endl;
-                                        int acao_aux;
-                                        acao_aux = 1;
-                                        cout << "vida antes: " << vida << endl;
-                                        Vida(vida, acao_aux);
-                                        cout << "vida depois: " << vida << endl;
-                                    }
-                                    mochila = 0;
-                                }
-                                ImprimirMatriz(matriz, tam_matriz);
-                                cout << "Mochila: " << mochila << endl << endl;
-                            }
-                            else
-                            {
-                            }
-                        }
-                        CasasNaoPercorridas(qtdCasasNaoAndadas);
+                        acaoLinha=1;
+                        acaoColuna=-1;
+                        MudaPosicaoAtual(matriz, tam_matriz, linha_aux, coluna_aux, acaoLinha, acaoColuna, vida, totalCasas, totalItens, totalPerigo, mochila, caminho, Nome1Arquivo);
                     }
                     acao = 0;
                     auxVida = Vida(vida, acao);
+                        /* CaminhoFoiPercorrido(caminho, linha_aux, coluna_aux, Nome1Arquivo);
+                        cout << "1TAM caminho: " << caminho.caminho.size() << endl << endl; */
                     break;
 
                 case 7: // irei para a diagonal-direita-inferior
                     if (linha_aux != tam_matriz - 1 && coluna_aux != tam_matriz - 1 && matriz[linha_aux + 1][coluna_aux + 1] != "#"){
-                        if (matriz[linha_aux + 1][coluna_aux + 1] == "*"){
-                            acao = -1;
-                            Vida(vida, acao);
-                            TotalDePerigosEnfrentados(totalPerigo);
-                            linha_aux++;
-                            coluna_aux++;
-                            ImprimirMatriz(matriz, tam_matriz);
-                            cout << "Vida: " << vida << endl << endl;
-                            CasasPercorridasAoTodo(totalCasas);
-                        }
-                        else{ // é pq é numero
-                            linha_aux++;
-                            coluna_aux++;
-                            CasasPercorridasAoTodo(totalCasas);
-                            if (matriz[linha_aux][coluna_aux] != "0"){
-                                MudaValorCaminho(matriz, linha_aux, coluna_aux);
-                                mochila++;
-                                TotalDeItensConsumidos(totalItens);
-                                CaminhoEhVazio=false;
-                                if (mochila == 4){
-                                    if (vida < 10){
-                                        cout << "\n>Mochila: " << mochila << endl;
-                                        cout << "Mochila atingiu seu limite, ganhou uma vida" << endl;
-                                        int acao_aux;
-                                        acao_aux = 1;
-                                        cout << "vida antes: " << vida << endl;
-                                        Vida(vida, acao_aux);
-                                        cout << "vida depois: " << vida << endl;
-                                    }
-                                    mochila = 0;
-                                }
-                                ImprimirMatriz(matriz, tam_matriz);
-                                cout << "Mochila: " << mochila << endl << endl;
-                            }
-                            else
-                            {
-                            }
-                        }
-                        CasasNaoPercorridas(qtdCasasNaoAndadas);
+                        acaoLinha=1;
+                        acaoColuna=1;
+                        MudaPosicaoAtual(matriz, tam_matriz, linha_aux, coluna_aux, acaoLinha, acaoColuna, vida, totalCasas, totalItens, totalPerigo, mochila, caminho, Nome1Arquivo);
                     }
                     acao = 0;
                     auxVida = Vida(vida, acao);
+                        /* CaminhoFoiPercorrido(caminho, linha_aux, coluna_aux, Nome1Arquivo);
+                        cout << "1TAM caminho: " << caminho.caminho.size() << endl << endl; */
                     break;
             }
-            cout << "--------------------------------CAMINHO È VAZIO::::::: " << CaminhoEhVazio << endl << endl;
-            cout << "--------------------------------COMECO::::::: " << comeco << endl << endl;
+            //cout << "--------------------------------CAMINHO È VAZIO::::::: " << CaminhoEhVazio << endl << endl;
+            //cout << "--------------------------------COMECO::::::: " << comeco << endl << endl;
         }
-         else{ // estou ou na ultima linha ou na ultima coluna, e devo me teletransportar para a nova matriz
-         // preciso so chamar para ir pro proximo. 
+         else{ 
+           // cout << "ENTROU BREAK" << endl;// estou ou na ultima linha ou na ultima coluna, e devo me teletransportar para a nova matriz. preciso so chamar para ir pro proximo. 
             break;
         }
         /* if(contVezesEntradas!=0){
-                if(Nome1Arquivo == nomesDosArquivos[i] && linha_aux == inicioLinha && coluna_aux == inicioColuna){
+                if(Nome1Arquivo == nomesDosArquivos[i] && linha_aux == inicioLinha && coluna_aux == inicioColuna && CaminhoEhVazio==true){
                     comeco=true;
                     cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" << endl;
                 }
-        } */
+        }*/
+        contVezesEntradas++; 
     }
 }
 
@@ -586,8 +296,7 @@ void CriandoArquivoParaCadaMatriz(string **matriz, int tam_matriz, int qtd_matri
     stringstream aux;
     cout << "NUMERO I: " << i << endl;
     cout << "QTD_MAtriz" << qtd_matriz << endl;
-    if (i < qtd_matriz)
-    {
+    if (i < qtd_matriz){
         numeroArquivo = i + 1;
         aux << numeroArquivo;
         numeroArquivo_str = aux.str();
@@ -600,10 +309,8 @@ void CriandoArquivoParaCadaMatriz(string **matriz, int tam_matriz, int qtd_matri
 
     ofstream arquivo;
     arquivo.open(nomeArquivo, ios::out);
-    for (int i = 0; i < tam_matriz; i++)
-    {
-        for (int j = 0; j < tam_matriz; j++)
-        {
+    for (int i = 0; i < tam_matriz; i++){
+        for (int j = 0; j < tam_matriz; j++){
             arquivo << matriz[i][j] << " ";
         }
         arquivo << endl;
@@ -619,9 +326,13 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int &vida)
     int i = 0, aux_linha = 0, aux_coluna = 0, acao = 0;
     bool auxVida = Vida(vida, acao);
     int mochila=0;
-    int cont_1vez = 0, totalCasas = 0, totalItens = 0, totalPerigo = 0, qtdCasas = 0;
+    //int  cont_1vez = 0;
+    int totalCasas = 0, totalItens = 0, totalPerigo = 0, qtdCasasNaoVisitadas=0;
+    vector<SalvaCaminho>CaminhoPercorrido;
+    CaminhoPercorrido.resize(qtd_matriz);
+    SalvaCaminho auxCaminhoPercorrido;
 
-    qtdCasas = CasasTotal(tam_matriz, qtd_matriz);
+    //qtdCasas = CasasTotal(tam_matriz, qtd_matriz);
     nome1arquivo=nomesDosArquivos[i];
 
     string **matriz_aux = new string *[tam_matriz];
@@ -638,18 +349,26 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int &vida)
     while (auxVida == true)
     {
         cout << "aaaaa" << endl; // ainda nao morri e ainda tem lugar pra passar
-        if(passouTodasMatrizes && comeco && i==qtd_matriz){ 
-            cout << "ENTRIE NO IF 3 LLLLLLLLLLLLLLLLLLLLLL" << endl;//se passou em todas as matrizes se passou na posição inicial
+        if(passouTodasMatrizes && comeco){ //se passou em todas as matrizes se passou na posição inicial
             if(CaminhoEhVazio==true){
                 cout << "CAMINHO ZERADO. VOCE CHEGOU AO FINAL DO JOGO, PARABENS :) !!" << endl;
                 break;
             }
-            cout << "ENTROOU AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII " << endl;
             CaminhoEhVazio=true;
+            passouTodasMatrizes=false;
+            comeco=false;
+            cout << "RRRR" << endl;
         }
+        /* if(passouTodasMatrizes && comeco){ //se passou em todas as matrizes se passou na posição inicial
+            if(CaminhoEhVazio==true){
+                cout << "CAMINHO ZERADO. VOCE CHEGOU AO FINAL DO JOGO, PARABENS :) !!" << endl;
+                break;
+            }
+            CaminhoEhVazio=true;
+            cout << "RRRR" << endl;
+        } */ //se tiro o i==qtd_matriz, se ja o primeiro estiver completo ele para.
         if (i == qtd_matriz)
         {   
-            cout << "PASOUUUUUUUUUUUUUUUUUUUUUUUUUUU" << endl;
             passouTodasMatrizes=true;
             i = 0;
         }
@@ -662,10 +381,13 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int &vida)
             CaminhoEhVazio=true;
         }*/
         nomeArquivo = nomesDosArquivos[i];
-        i++;
+        RecebeNomeDosArquivosJaCriados(CaminhoPercorrido, qtd_matriz);
+        auxCaminhoPercorrido = CaminhoPercorrido[i];
+        //CaminhoPercorrido[i].nomeArq=nomeArquivo;
+        //CaminhoPercorrido[j];
+        //i++;
 
         cout << "NOME ARQUIVO: " << nomeArquivo << endl;
-        // cout << "CONT1Vida: " << cont_1vez << endl;
         arquivo_leitura.open(nomeArquivo, ios::in);
         while (!arquivo_leitura.eof())
         {
@@ -693,15 +415,17 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int &vida)
         aux_linha = 0;
 
         // ImprimirMatriz(matriz_aux, tam_matriz);
-        if (cont_1vez == 0)
+        /* if (cont_1vez == 0)
         { // mantem a primeira vez que a pessoa digitou.
             cont_1vez++;
-            PercorrerMatriz(matriz_aux, linha, coluna, tam_matriz, vida, totalCasas, totalItens, totalPerigo, qtdCasas, nomeArquivo, mochila);
+            PercorrerMatriz(matriz_aux, linha, coluna, tam_matriz, vida, totalCasas, totalItens, totalPerigo, nomeArquivo, mochila, auxCaminhoPercorrido);
             auxVida = Vida(vida, acao);
             PassaNovaMatrizParaArquivo(matriz_aux, nomeArquivo, tam_matriz);
-        }
-        else
-        {
+            CaminhoPercorrido[i]=auxCaminhoPercorrido;
+    
+        } */
+        //else
+        //{
             // cout << ">>>Posição[" << linha << "]" << "[" << coluna << "]" <<endl;
             if (matriz_aux[linha][coluna] == "#" || linha == tam_matriz-1 || coluna == tam_matriz-1)
             {   
@@ -711,33 +435,51 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int &vida)
                     linha = rand() % tam_matriz;
                     coluna = rand() % tam_matriz;
                     cout << "Posição inicial mudada [" << linha << "]" << "[" << coluna << "]" << endl;
+                    inicioLinha=linha;
+                    inicioColuna=coluna;
                 }
-                PercorrerMatriz(matriz_aux, linha, coluna, tam_matriz, vida, totalCasas, totalItens, totalPerigo, qtdCasas, nomeArquivo, mochila);
+                PercorrerMatriz(matriz_aux, linha, coluna, tam_matriz, vida, totalCasas, totalItens, totalPerigo, nomeArquivo, mochila, auxCaminhoPercorrido);
                 auxVida = Vida(vida, acao);
                 PassaNovaMatrizParaArquivo(matriz_aux, nomeArquivo, tam_matriz);
+                cout << "333333" << endl;
+                CaminhoPercorrido[i]=auxCaminhoPercorrido;
+        
             }
             else
             {
-                PercorrerMatriz(matriz_aux, linha, coluna, tam_matriz, vida, totalCasas, totalItens, totalPerigo, qtdCasas, nomeArquivo, mochila);
+                PercorrerMatriz(matriz_aux, linha, coluna, tam_matriz, vida, totalCasas, totalItens, totalPerigo, nomeArquivo, mochila, auxCaminhoPercorrido);
                 auxVida = Vida(vida, acao);
                 PassaNovaMatrizParaArquivo(matriz_aux, nomeArquivo, tam_matriz);
+                CaminhoPercorrido[i]=auxCaminhoPercorrido;
+        
             }
             // cout << ">>>Posição[" << linha << "]" << "[" << coluna << "]" <<endl;
-        }
+        //}
         // cout << "----------------------------------------------------------" << endl;
         // ImprimirMatriz(matriz_aux, tam_matriz);
+        i++;
     }
+
+    qtdCasasNaoVisitadas=CasasNaoVisitadas(CaminhoPercorrido, qtd_matriz, tam_matriz);
+    
     cout << "\n\n>TOTAL DE CASAS PERCORRIDAS: " << totalCasas << endl;
     cout << ">TOTAL DE ITENS CONSUMIDOS: " << totalItens << endl;
     cout << ">TOTAL DE PERIGOS ENFRENTADOS: " << totalPerigo << endl;
-    cout << ">QUATIDADE DE CASAS NAO VISITADAS: " << qtdCasas << endl;
+    cout << ">QUATIDADE DE CASAS NAO VISITADAS: " << qtdCasasNaoVisitadas << endl;
+    for(int j=0; j<qtd_matriz; j++){
+        cout << "QTDS CADA VETOR: " << j << "-"<< CaminhoPercorrido[
+    j].caminho.size() << endl;
+    }
+    cout << "NOMES ARQUIVOS: " << endl;
+    for(int i=0; i<qtd_matriz; i++){
+        cout << "NOME: " << CaminhoPercorrido[i].nomeArq << endl;
+    }
     // ExcluiArquivosCriados(qtd_matriz);
 }
 
 bool Vida(int &vida, int acao)
 {
-    if (vida > 1)
-    {
+    if (vida > 1){
         if (acao == 1){ // é porque vou ganhar vida
             vida++;
             return true;
@@ -792,8 +534,7 @@ void PassaNovaMatrizParaArquivo(string **matriz, string nomeArq, int tam_matriz)
     ofstream arquivo_escrita;
 
     arquivo_escrita.open(nomeArq, ios::out);
-    for (int i = 0; i < tam_matriz; i++)
-    {
+    for (int i = 0; i < tam_matriz; i++){
         for (int j = 0; j < tam_matriz; j++)
         {
             arquivo_escrita << matriz[i][j] << " ";
@@ -805,8 +546,7 @@ void PassaNovaMatrizParaArquivo(string **matriz, string nomeArq, int tam_matriz)
 
 void ExcluiArquivosCriados(int qtd_matriz)
 {
-    for (int i = 0; i < qtd_matriz; i++)
-    {
+    for (int i = 0; i < qtd_matriz; i++){
         char nomeArquivoRemovido[100];
         strcpy(nomeArquivoRemovido, nomesDosArquivos[i].c_str());
         // remove(nomeArquivoRemovido);
@@ -846,19 +586,83 @@ void CasasNaoPercorridas(int &qtdCasasNaoPercorridas)
     qtdCasasNaoPercorridas--;
 }
 
-//void MudaPosicaoAtual(string **matriz, int acaoLinha, int acaoColuna);
-
-
-/* bool CaminhoVazio(bool &caminho)
-{
-    if (caminho == false)
-    {
-        caminho = false;
-        return caminho;
+void MudaPosicaoAtual(string **matriz, int tam_matriz, int& linha_aux, int& coluna_aux, int acaoLinha, int acaoColuna, int& vida, int &totalCasas, int &totalItens, int &totalPerigo, int& mochila, SalvaCaminho& caminho, string nomeArq){
+    int acao=0;
+    if (matriz[linha_aux + acaoLinha][coluna_aux + acaoColuna] == "*"){
+        acao = -1;
+        Vida(vida, acao);
+        TotalDePerigosEnfrentados(totalPerigo);
+        linha_aux= linha_aux+acaoLinha;
+        coluna_aux= coluna_aux+acaoColuna;
+        ImprimirMatriz(matriz, tam_matriz);
+        cout << "Vida: " << vida << endl << endl;
+        CasasPercorridasAoTodo(totalCasas);
     }
-    else
-    {
-        caminho = true;
-        return caminho;
+    else{ // é pq é numero
+        linha_aux= linha_aux+acaoLinha;
+        coluna_aux= coluna_aux+acaoColuna;
+        CasasPercorridasAoTodo(totalCasas);
+        if (matriz[linha_aux][coluna_aux] != "0"){
+            MudaValorCaminho(matriz, linha_aux, coluna_aux);
+            mochila++;
+            TotalDeItensConsumidos(totalItens);
+            CaminhoEhVazio=false;
+            if (mochila == 4){
+                if (vida < 10){
+                    cout << "\n>Mochila: " << mochila << endl;
+                    cout << "Mochila atingiu seu limite, ganhou uma vida" << endl;
+                    int acao_aux;
+                    acao_aux = 1;
+                    cout << "vida antes: " << vida << endl;
+                    Vida(vida, acao_aux);
+                    cout << "vida depois: " << vida << endl;
+                }
+                mochila = 0;
+            }
+            ImprimirMatriz(matriz, tam_matriz);
+            cout << "Mochila: " << mochila << endl << endl;
+        }
+        else
+        {
+        }
     }
-} */
+    CaminhoFoiPercorrido(caminho, linha_aux, coluna_aux, nomeArq);
+    cout << ">TAM " << caminho.caminho.size() << endl;
+    cout << ">>CASAS PASSADAS " << totalCasas << endl;
+}
+
+void CaminhoFoiPercorrido(SalvaCaminho& caminhoNaoPercorrido, int linha, int coluna, string nomeArq){
+    int tamanho = caminhoNaoPercorrido.caminho.size();
+    if(caminhoNaoPercorrido.nomeArq == nomeArq){
+        //cout << "ENTROU NA FUNC" << endl;
+        bool encontrado = false;
+        for(int i=0; i<tamanho; i++){
+            if(caminhoNaoPercorrido.caminho[i].first == linha && caminhoNaoPercorrido.caminho[i].second == coluna){//ja tem salvo esse caminho
+                encontrado = true;
+                break;
+            }
+        }
+        if(!encontrado){//nao tem salvo e devo salvar
+            caminhoNaoPercorrido.caminho.push_back({linha,coluna});
+        }
+    }
+}
+
+void RecebeNomeDosArquivosJaCriados(vector<SalvaCaminho>& caminho, int qtd_matriz){
+    for(int i=0; i<qtd_matriz; i++){
+        caminho[i].nomeArq=nomesDosArquivos[i];
+        //cout << "nome: " << caminho[i].nomeArq << endl;
+    }
+}
+
+int CasasNaoVisitadas(vector<SalvaCaminho>& caminho, int qtd_matriz, int tam_matriz){
+    int somaTodasCasasPercorridas=0, casasTotal=0, casasNaoVisitadas=0;
+    for(int i=0; i<qtd_matriz; i++){
+        somaTodasCasasPercorridas+=caminho[i].caminho.size();
+    }
+    casasTotal=CasasTotal(tam_matriz, qtd_matriz);
+
+    casasNaoVisitadas=casasTotal-somaTodasCasasPercorridas;
+
+    return casasNaoVisitadas;
+}
