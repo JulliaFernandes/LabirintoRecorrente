@@ -111,12 +111,13 @@ Nesse gif é possivel observar o funcionamento do codigo de uma maneira mais vis
 Acontecimentos:
 <ul>
 <li>Matriz inicial sem mudanças e o nome de seu arquivo</li>
+<li>Posição escolhida pelo usuario impossivel devido a existencia de parede.</li>
+<li>Gerou uma nova posição aleatoria para começar, devido ao item acima;</li>
 <li>Posição gerada pelo switch impossivel de ir devido a parede(#);</li>
-<li>Gerou uma posição aleatoria para começar, devido ao item acima;</li>
 <li>Perde vida ao enfrentar um perigo;</li>
 <li>Mochila aumentando de item e as posições diminuindo;</li>
 <li>Mochila no maximo e fazendo a trocando por vida, logo apos esvaziando a mochila;</li>
-<li>Chegando a extremidade da matriz e finalizando a função ja que irá se teletranportar a outra matriz</li>
+<li>Chegando a extremidade da matriz e finalizando a função ja que irá se teletransportar a outra matriz</li>
 </ul>
 
 <p align="center">
