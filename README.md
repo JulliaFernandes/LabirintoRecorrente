@@ -3,16 +3,6 @@
 ![Linguagem](https://img.shields.io/badge/Linguagem-C%2B%2B-blue)<br>
 Atividade realizada no 3º periodo para a disciplina de Algoritmos e Estrutura de Dados.
 
-## Sumário
-
-<!--ts-->
-   * [Problema Proposto](#problema-proposto)
-   * [Autômato Finito Determinístico](#autômato-finito-determinístico)
-   * [Implementação](#implementação)
-   * [Resultados e Análises](#resultados-e-análises)
-   * [Compilação e Execução](#compilação-e-execução)
-   * [Contato](#contato)
-<!--te-->
 
 # Sumário
 
