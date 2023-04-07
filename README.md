@@ -1,17 +1,28 @@
 # LabirintoRecorrente
 [![requirement](https://img.shields.io/badge/IDE-Visual%20Studio%20Code-informational)](https://code.visualstudio.com/docs/?dv=linux64_deb)
 ![Linguagem](https://img.shields.io/badge/Linguagem-C%2B%2B-blue)<br>
-Atividade realizada no 3º periodo para a disciplina de Algoritmos e Estrutura de Dados.
-
+<strong>Atividade realizada no 3º periodo para a disciplina de Algoritmos e Estrutura de Dados.</strong>
 
 # Sumário
 
+- [Objetivos](#Objetivos)
 - [Problema apresentado](#Problema-apresentado)
-- [Aruivos](#Arquivos)
+- [Arquivos](#Arquivos)
 - [Resolução do Problema](#Resolução-do-problema)
 - [Exemplifição](#Exemplificação)
+- [Resultados esperados](#Resultados-esperados)
 - [Compilação e Execução](#Compilação-e-Execução)
 
+
+## Objetivos
+O objetivo dessa atividade é propor o desenvolvimento de um algoritmo que permita ao personagem chegar ao final de um labirinto fazendo todo seu caminho ser vazio, entretanto ha desafios pelo caminho que devem ser tratados e que pode levar o pesonagem nao cumprir sua missão.<br>
+Algumas condições sao impostas para o bom funciomanto de codigo:
+ - Todas as matrizes devem estar contidas no arquivo `input.data`;
+ - A primeira linha do arquivo `input.data` deve conter o tamanho da matriz e a quantidade existente, seguindo esse modelo: ' 5 5 3';
+   - Todas as matrizes devem ser quadradas.<br>
+ - Necessidade de possuir ao mínimo uma matriz de numeros inteiros entre 0 e 9 e somente dois tipos de caracteres são permitidos:
+    - '#' -Representa parede
+    - '*' -Representa perigo
 
 ## Problema apresentado
 - Um garoto se encontra perdido em um labirinto, o qual é compreendido por nós como sendo uma matriz cujas posição de sua localização é dada por um valor x,y dessa estrutura. Nesse labirinto há paredes que bloqueiam certos passos (#), perigos que consomem parte de sua vida (*) e trajetórias (valores positivos que devem ser subtraídos em 1 a cada passagem).
@@ -23,23 +34,20 @@ Atividade realizada no 3º periodo para a disciplina de Algoritmos e Estrutura d
 <strong>Labirinto.hpp:</strong> Onde é criada todas as nossas funções que seram executadas no decorrer do algoritmo.<br>
 <strong>Labirinto.cpp:</strong> Onde é feita a estruturação de todas as funções criadas e onde sera desenvolvido todo o codigo.<br>
 <strong>Terminal:</strong> Aparece ao usuario, quantas casas foram percorridas durante a execução do codigo, quantos itens foram coletados, a quantidade de perigos enfrentados e quantas posiçoes nao foram acessadas durante o percurso gerado pelo codigo.<br>
-<strong>dataset/input.data:</strong> Arquivo contendo o tamanho da matriz, a quantidade matrizes, sendo ela(s) de numeros inteiros e dois tipos de caracteres, '*' e '#',  somente.
-<ul>
-  <li>Na primeira linha do arquivo é necessário ter o tamanho da matriz e a quantidade de matriz que irão compor esse arquivo, sendo implementado dessa maneira: '5 5 3' e a necessidade de possuir ao mínimo uma matriz de numeros inteiros entre 0 e 9 e somente dois tipos de caracteres ja especificados acima, do tamanho correspondente ao da primeira linha, para a boa execução do código</li>
-</ul>
+<strong>dataset/input.data:</strong> Arquivo contendo o tamanho da matriz, a quantidade matrizes, e as matrizes que serão utlizadas.
 
 ## Resolução do problema 
-As duas funções principais que faz o funcionamento do codigo sao: `StartJogo` e `PercorrerMatriz`, são nelas que é feita toda a implementação do desenvolvimento do codigo, cumprimindo todas as codiçoes passadas pelo professor.<br>
+As duas funções principais que faz o funcionamento do codigo sao: `LerArquivo`, `StartJogo` e `PercorrerMatriz`, são nelas que é feita toda a implementação do desenvolvimento do codigo, cumprimindo todas as codiçoes passadas pelo professor.<br>
 
 <strong>Explicação detalhada da função 'LerArquivo':</strong>
 
-<ul>
-<li>É feita a abertura do arquivo input.data, pois é nela que esta armazenado todas as nossas matrizes que usaremos durante todo o nosso jogo.</li>
-<li>O arquivo input.data é lido de maneira que a cada linha vazia vista, é sinal de que toda uma matriz foi percorrida e desse modo podemos salvar essa matriz lida em um arquivo que contera somente ela.</li>
-<li>Esse arquivo unico de cada matriz é feito na função  'CriandoArquivoParaCadaMatriz'(linha X) na qual cada arquivo recebera um nome diferente, basedo na sua matriz correspondente, ou seja, para a primeira matriz lida, o nome de seu arquivo sera: 'dataset/matriz1.data'</li>
-<li>Os nomes de arquivos criados sao todos salvos em um vetor global para sua utlização em outra parte do codigo</li>
-  - Todos os arquivos de matrizes criados ficaram salvos na pasta dataset, que ao final do jogo todas elas seram excluidas para liberação de memoria.
-</ul>
+- É feita a abertura do arquivo input.data, pois é nela que esta armazenado todas as nossas matrizes que usaremos durante todo o nosso jogo.</li>
+- O arquivo input.data é lido de maneira que a cada linha vazia vista, é sinal de que toda uma matriz foi percorrida, e desse modo podemos salvar essa matriz lida em um arquivo que contera somente ela.
+   - Nesse codigo, a fim de melhorar o desempenho e nao ocupar tanta memoria RAM, foi adotado que cada matriz presente no arquivo orignal, tera um arquivo contendo somente ela.
+- Esse arquivo unico de cada matriz é feito na função `CriandoArquivoParaCadaMatriz`(linha X) na qual cada arquivo recebera um nome diferente, basedo na sua matriz correspondente, ou seja, para a primeira matriz lida, o nome de seu arquivo sera: 'dataset/matriz1.data'<br>
+
+<strong>OBS:</strong> Todos os arquivos de matrizes criados ficaram salvos na pasta dataset, que ao final do jogo todas elas seram excluidas para liberação de memoria.
+
 
 <div align="center">
   <img src="/imgs/ArquivosCriados_Exemplo.PNG" alt="Pasta Dataset">
@@ -47,32 +55,29 @@ As duas funções principais que faz o funcionamento do codigo sao: `StartJogo` 
 </div>
 
 <strong>Explicação detalhada da função 'Startjogo':</strong><br>
-De maneira geral nessa função é feita a abertura do arquivo que contem a matriz a ser percorrida no momento, é chamado a função que ira percorrer a matriz e é onde é feito a analise o numero de vidas, se devemos ou não continuar no jogo e por fim é nela que nos teletrasportamos para a proxima matriz. 
+De maneira geral nessa função é feita a abertura do arquivo que contem a matriz a ser percorrida no momento, é chamado a função que ira percorrer a matriz e é onde é feito a analise o numero de vidas, se devemos ou não continuar no jogo e por fim é nela que nos teletrasportamos para a proxima matriz.
 
-<ul>
-<li>É pedido ao usuario que digite o numero da posição inical em que deseja começar o jogo</li>
-  - importante ressaltar que se a posição digitada pelo ususario for uma parede(#), a posição de inicio sera gerada aleatoriamente ate que seja uma posição aceita pelo programa, as exeções são: se forem paredes ou entao se for a ultima linha ou ultima coluna, sendo as duas ultimas, as condiçoes de teletranspote de uma matriz para a outra.   
-<li>É criado uma matriz de string auxiliar que sera ela que usaremos durante todo nosso codigo para armazenarmos as matrizes lidas em seus arquivo e usa-las para percorrer</li>
-<li>Uma variavel recebera os nomes, um por vez e em sequencia, do vetor que armazena o nome de todos os arquivos criados para as matrizes, pois é essa variavel que fara o controle de qual arquivo de matriz estamos e qual sera a matriz alterada durante o percurso.</li>
-<li>É visto entao se a posição digitada pelo usuario é uma parede ou são as condições de teletransporte para a outra matriz, pois se for o jogo nao deverá começar ate que se encontre em uma posição adequada dessa maneira a posição inical é gerada randomicamente pelo programa.</li>
-<li>Se todos os criterios acima estiverem de acordo, começamos o jogo, chamando a função `PercorrerMatriz`</li>
-<li>Apos feito todo o percurso de nossa matriz, a mesma se encontra diferente de antes logo ela deve ser passada para o seu arquivo ja modificada, para isso chamamos a função `PassaNovaMatrizParaArquivo`</li>
-<li> Logo apos a chamada da função de percorrer é visto tambem se nossa vida acabou, pois se sim, devemos parar o codigo e informar ao usuario que o jogo foi finalizado e que ele chegou ao nivel zero de vidas.</li>
- <li>Por fim a função é atualizada para proseguirmos para o proximo arquivo e faremos os mesmos passos se tudo continuar sendo cumprido.</li>
-<li>Essa iteração ocorre enquanto tivermos vida, ou se o todo o caminho feito ainda possuir itens a serem coletados.</li><br>
-  - <strong>Importante:</strong> a decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo input.data, se chegado a ultima matriz do arquivo voltamos a primeira matriz. 
-</ul>
+- É pedido ao usuario que digite o numero da posição inical em que deseja começar o jogo
+  - importante ressaltar que se a posição digitada pelo ususario for uma parede(#), a posição de inicio sera gerada aleatoriamente ate que seja uma posição aceita pelo programa, as exeções são: se forem paredes ou entao se for a ultima linha ou ultima coluna, sendo as duas ultimas, as condiçoes de teletranspote de uma matriz para a outra. O jogo só começará se tudo isso for cumprido.
+- É criado uma matriz de string auxiliar que sera ela que usaremos durante todo nosso codigo para armazenarmos as matrizes lidas de seus respectivos arquivos e usa-las para percorrer
+- Uma variavel recebera os nomes, um por vez e em sequencia, do vetor que armazena o nome de todos os arquivos criados para as matrizes, pois é essa variavel que fara o controle de qual arquivo de matriz estamos e qual sera a matriz alterada durante o percurso.
+- Se todos os criterios acima estiverem de acordo, começamos o jogo, chamando a função `PercorrerMatriz`
+- Apos feito todo o percurso de nossa matriz, a mesma se encontra diferente de antes logo ela deve ser passada para o seu arquivo ja modificada, para isso chamamos a função `PassaNovaMatrizParaArquivo`
+- Logo apos a chamada da função de percorrer é visto tambem se nossa vida acabou, pois se sim, devemos parar o codigo e informar ao usuario que o jogo foi finalizado e que ele chegou ao nivel zero de vidas.
+- Por fim a função é atualizada para proseguirmos para o proximo arquivo e faremos os mesmos passos se tudo continuar sendo cumprido.
+- Essa iteração ocorre enquanto tivermos vida, ou se o todo o caminho feito ainda possuir itens a serem coletados.<br>
+  - <strong>Importante:</strong> a decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo `input.data`, se chegado a ultima matriz do arquivo voltamos a primeira matriz. 
+
 
 <strong>Explicação detalhada da função 'PercorrerMatriz':</strong><br>
 Essa função tem como criterio de decisão qual direção o usuario ira, feita por switch's, sendo cada 'case' uma direção possivel.
-<ul>
-<li>Assim que inicializado essa função, a posição em que o personagem se encontra ja sofrerá mudanças, ate mesmo a posição inical em que o usuario começa o jogo.</li>
-<li>Ela é realizada por um loop que somente se atingirmos a posicao que nos levara a outra matriz ou entao se nossa vida chegar a zero, ele é parado. (Os criterios de teletransporte ja foram explicados acima)</li>
-<li>É gerado um numero randomico entre 0 a 7 e que cada um representara a decisao de direção a ser seguida.</li>
-<li>É tratado os casos de extremidades da matriz, quando gerado um numero em que a posição nao é possivel ser seguida, é gerado um outro numero aleatorio ate que seja possivel o personagem se mover.</li>
-<li>É visto se a posição em que o personagem irá é um perigo(*) ou um item(numeros de 0 a 9), se em caso de perigo, o personagem sofre um dano em sua vida e perde uma, se em caso de item, ele recebe um item que ira para sua mochila e o numero naquela posição diminui em 1 unidade, ate chegar em zero.</li>
-   - sempre que sua mochila chegue a 4 itens, seus itens sao trocados em 1 vida e é zerada sua mochila novamente, para os casos em que sua vida ja esta totalmente cheia, nada ocorre em sua vida mas sua mochila sera zerada.
-</ul>
+
+- Assim que inicializado essa função, a posição em que o personagem se encontra ja sofrerá mudanças, ate mesmo a posição inical em que o usuario começa o jogo.
+- Ela é realizada por um loop que somente se atingirmos a posicao que nos levara a outra matriz ou entao se nossa vida chegar a zero, ele é parado. (Os criterios de teletransporte ja foram explicados acima)
+- É gerado um numero randomico entre 0 a 7 e que cada um representara a decisao de direção a ser seguida.
+- É tratado os casos de extremidades da matriz, quando gerado um numero em que a posição nao é possivel ser seguida, é gerado um outro numero aleatorio ate que seja possivel o personagem se mover.
+- É visto se a posição em que o personagem irá é um perigo(*) ou um item(numeros de 0 a 9), se em caso de perigo, o personagem sofre um dano em sua vida e perde uma, se em caso de item, ele recebe um item que ira para sua mochila e o numero naquela posição diminui em 1 unidade, ate chegar em zero.
+   - Sempre que a mochila chega a 4 itens, os itens sao trocados em 1 vida e é zerada a mochila novamente, para os casos em que a vida ja esteja totalmente cheia, nada ocorre à vida mas sua mochila será zerada.
 
 <p align="center">
 <strong><em>Direçãoes possiveis em cada 'case' presente no switch </em></strong>
@@ -135,6 +140,7 @@ Acontecimentos:
 <img src="/imgs/gif_maze.gif" alt="Gif Maze">
 </p>
 
+## Resultados esperados 
 
 ## Compilação e Execução
 
