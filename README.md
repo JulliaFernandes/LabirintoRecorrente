@@ -38,7 +38,7 @@ Algumas condições sao impostas para o bom funciomanto de codigo:
 <strong>dataset/input.data:</strong> Arquivo contendo o tamanho da matriz, a quantidade matrizes, e as matrizes que serão utlizadas.
 
 ## Resolução do problema 
-As duas funções principais que faz o funcionamento do codigo sao: `LerArquivo`, `StartJogo` e `PercorrerMatriz`, são nelas que é feita toda a implementação do desenvolvimento do codigo, cumprimindo todas as codiçoes passadas pelo professor.<br>
+As funções principais que fazem o funcionamento do codigo sao: `LerArquivo`, `StartJogo` e `PercorrerMatriz`, são nelas que é feita toda a implementação do desenvolvimento do codigo, cumprimindo todas as codiçoes passadas pelo professor.<br>
 
 <strong>Explicação detalhada da função 'LerArquivo':</strong>
 
