@@ -10,6 +10,7 @@
 - [Arquivos](#Arquivos)
 - [Resolução do Problema](#Resolução-do-problema)
 - [Exemplifição](#Exemplificação)
+- [Custo Computaciona](#Custo-computacional)
 - [Resultados esperados](#Resultados-esperados)
 - [Conclusão](#Conclusão)
 - [Compilação e Execução](#Compilação-e-Execução)
@@ -141,6 +142,9 @@ Acontecimentos:
 <p align="center">
 <img src="/imgs/gif_maze.gif" alt="Gif Maze">
 </p>
+
+## Custo Computacional
+
 
 ## Resultados esperados 
 
