@@ -35,8 +35,9 @@ void TotalDeItensConsumidos(int &total_itens);
 void TotalDePerigosEnfrentados(int &totalPerigo);
 int CasasTotal(int tam_matriz, int qtd_matriz);
 void CasasNaoPercorridas(int& qtdCasasNaoPercorridas);
-void MudaPosicaoAtual(string **matriz, int tam_matriz, int& linha_aux, int& coluna_aux, int acaoLinha, int acaoColuna, int& vida, int &totalCasas, int &totalItens, int &totalPerigo, int& mochila, SalvaCaminho& caminho, string nomeArq);
+void MudaPosicaoAtual(string **matriz, int& linha_aux, int& coluna_aux, int acaoLinha, int acaoColuna, int& vida, int &totalCasas, int &totalItens, int &totalPerigo, int& mochila, SalvaCaminho& caminho, string nomeArq);
 void CaminhoFoiPercorrido(SalvaCaminho& caminhoNaoPercorrido, int linha, int coluna, string nomeArq);
 void RecebeNomeDosArquivosJaCriados(vector<SalvaCaminho>& caminho, int qtd_matriz);
 int CasasNaoVisitadas(vector<SalvaCaminho>& caminho, int qtd_matriz, int tam_matriz);
+bool ConfereSeEnvoltaEhParede(string **matriz, int linha, int coluna, int tam_matriz);
 #endif

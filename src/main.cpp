@@ -7,9 +7,7 @@ using namespace std;
 int main(){
 	
 	int tam_matriz, qtd_matriz;
-	//int i=0;
 	int linha=0, coluna=0, vida=10;
-	//bool caminho=true;
 	
 	tie(tam_matriz, qtd_matriz) = LePrimeraLinha();
 	cout << "Codigo Jullia" << endl;
@@ -21,14 +19,8 @@ int main(){
         matriz[i]=new string[tam_matriz];
     }
 
-	//tie(linha, coluna) = PosicaoInicial(linha, coluna, tam_matriz);
 	LerArquivo(matriz, tam_matriz, qtd_matriz);
 	StartJogo(linha, coluna, tam_matriz, qtd_matriz, vida);
-	//ImprimirMatriz(matriz, tam_matriz);
-	//RandomLinha(tam_matriz, tam_matriz);
-	//CriandoArquivoParaCadaMatriz(qtd_matriz, i);
-
-	//cout << "Posição inicial [" << linha << "]" << "[" << coluna << "]" <<endl;
 
 	return 0;
 }
