@@ -149,7 +149,7 @@ Acontecimentos:
 ## Resultados esperados 
 
 ## Conclusão 
-Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, em sua implementação foi possivel ser feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos sobre problemas que poderiam ocorrer no decorrer da atividade, vistos em aula, sendo aplicado os conehcimentos de custo computacional, por mais de que tenha um custo mais caro de memoria, esse algorimo se torna melhor no desempenho. 
+Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, em sua implementação foi possivel ser feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos sobre problemas que poderiam ocorrer no decorrer da atividade, vistos em aula, sendo aplicado os conehcimentos de custo computacional, por mais de que tenha um custo mais caro de memoria,devido a criação de arquivos para cada matriz, esse algorimo se torna melhor no desempenho. 
 
 ## Compilação e Execução
 
