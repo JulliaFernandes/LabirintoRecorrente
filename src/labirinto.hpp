@@ -40,4 +40,5 @@ void CaminhoFoiPercorrido(SalvaCaminho& caminhoNaoPercorrido, int linha, int col
 void RecebeNomeDosArquivosJaCriados(vector<SalvaCaminho>& caminho, int qtd_matriz);
 int CasasNaoVisitadas(vector<SalvaCaminho>& caminho, int qtd_matriz, int tam_matriz);
 bool ConfereSeEnvoltaEhParede(string **matriz, int linha, int coluna, int tam_matriz);
+void SalvaMatrizesAlteradas(int tam_matriz, int qtd_matriz);
 #endif

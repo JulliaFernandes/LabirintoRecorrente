@@ -5,7 +5,8 @@
 using namespace std;
 
 int main(){
-	
+	clock_t inicio = clock();
+
 	int tam_matriz, qtd_matriz;
 	int linha=0, coluna=0, vida=10;
 	
@@ -22,5 +23,9 @@ int main(){
 	LerArquivo(matriz, tam_matriz, qtd_matriz);
 	StartJogo(linha, coluna, tam_matriz, qtd_matriz, vida);
 
+	clock_t fim = clock();
+
+	double tempoTotalExecucao = (double) (fim-inicio)/CLOCKS_PER_SEC;
+	cout << "TEMPO DE EXECUÇÂO É DE: " << tempoTotalExecucao << "SEGUNDOS" << endl; 
 	return 0;
 }

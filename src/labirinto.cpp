@@ -289,8 +289,7 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int &vida)
     nome1arquivo=nomesDosArquivos[i];
 
     string **matriz_aux = new string *[tam_matriz];
-    for (int i = 0; i < tam_matriz; i++)
-    {
+    for (int i = 0; i < tam_matriz; i++){
         matriz_aux[i] = new string[tam_matriz];
     }
 
@@ -414,6 +413,7 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int &vida)
     for(int i=0; i<qtd_matriz; i++){
         cout << "NOME: " << CaminhoPercorrido[i].nomeArq << endl;
     } */
+    SalvaMatrizesAlteradas(tam_matriz, qtd_matriz);
     ExcluiArquivosCriados(qtd_matriz);
 }
 
@@ -649,4 +649,56 @@ bool ConfereSeEnvoltaEhParede(string **matriz, int linha, int coluna, int tam_ma
     }
 
     return retorno;
+}
+
+void SalvaMatrizesAlteradas(int tam_matriz, int qtd_matriz){
+    
+    ifstream arquivoLeitura; //leitura
+    ofstream arquivoFinal;  //escrita
+    string nomeArquivo, linha_arq, elemento, arquivoOutput="dataset/output.data";
+    int aux_linha=0, aux_coluna=0;
+
+    string **matriz_aux = new string *[tam_matriz];
+    for (int i = 0; i < tam_matriz; i++){
+        matriz_aux[i] = new string[tam_matriz];
+    }
+
+    arquivoFinal.open(arquivoOutput, ios::out);
+    for(int i=0; i<qtd_matriz; i++){
+        nomeArquivo = nomesDosArquivos[i];
+        arquivoLeitura.open(nomeArquivo, ios::in);
+
+            while(!arquivoLeitura.eof()){
+                while(getline(arquivoLeitura, linha_arq, '\n')){
+                    stringstream aux(linha_arq);
+                    
+                    while (getline(aux, elemento, ' ')){ // lendo a cada elemento presente na minha linha armazena para minha variavel elemento e tendo o delimitador ''
+                        if(aux_coluna < tam_matriz && aux_linha < tam_matriz){
+                            matriz_aux[aux_linha][aux_coluna] = elemento;
+                            aux_coluna++;
+                        }
+                    }
+                    
+                    if (aux_coluna > 0 && aux_linha < tam_matriz){
+                        aux_linha++;
+                        aux_coluna = 0;
+                    }
+                }
+            }
+            
+            arquivoLeitura.close();
+            aux_coluna = 0;
+            aux_linha = 0;
+
+            for (int i = 0; i < tam_matriz; i++){
+                for (int j = 0; j < tam_matriz; j++){
+                    arquivoFinal << matriz_aux[i][j] << " ";
+                }
+                arquivoFinal << endl;
+            }
+            arquivoFinal << endl;
+    }
+
+    arquivoFinal.close();
+
 }
