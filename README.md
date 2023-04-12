@@ -37,7 +37,8 @@ Algumas condições sao impostas para o bom funciomanto de codigo:
 <strong>Labirinto.hpp:</strong> Onde é criada todas as nossas funções que seram executadas no decorrer do algoritmo.<br>
 <strong>Labirinto.cpp:</strong> Onde é feita a estruturação de todas as funções criadas e onde sera desenvolvido todo o codigo.<br>
 <strong>Terminal:</strong> Aparece ao usuario, quantas casas foram percorridas durante a execução do codigo, quantos itens foram coletados, a quantidade de perigos enfrentados e quantas posiçoes nao foram acessadas durante o percurso gerado pelo codigo.<br>
-<strong>dataset/input.data:</strong> Arquivo contendo o tamanho da matriz, a quantidade matrizes, e as matrizes que serão utlizadas.
+<strong>dataset/input.data:</strong> Arquivo contendo o tamanho da matriz, a quantidade matrizes, e as matrizes que serão utlizadas.<br>
+<strong>dataset/output.data:</strong> Arquivo contento todas as matrizes, as que foram modificadas ou não, para fins visuais de quais posições foram percorridas.
 
 ## Resolução do problema 
 As funções principais que fazem o funcionamento do codigo sao: `LerArquivo`, `StartJogo` e `PercorrerMatriz`, são nelas que é feita toda a implementação do desenvolvimento do codigo, cumprimindo todas as codiçoes passadas pelo professor.<br>
@@ -125,6 +126,25 @@ Essa função tem como criterio de decisão qual direção o usuario ira, feita 
   </tr>
 </table>
 
+<h3>Informações importantes</h3>
+-A função 'Vida' é necessario um tipo de ação que ira ocorrer com ela, a tabela abaixo exemplifica oque cada numero significa.<br>
+    -Outros valores diferentes dos mostrados na tebela levaram ao mal funcionamento do codigo.
+<ul>
+  <li>A função 'Vida' é necessária para indicar o tipo de ação que irá ocorrer com ela. A tabela abaixo exemplifica o que cada número significa:</li>
+</ul>
+    
+<div align="center">
+
+| Ação             |  Função                                                 |                     
+| -----------------| --------------------------------------------------------|
+| '-1'             | Diminiu a vida em 1 unidade                             |
+| '0'              | Somente para fins de obtenção da situação da vida       |
+| '1'              | Adicionar 1 unidade à vida                              |
+
+<li>Outros valores diferentes dos mostrados na tabela podem levar ao mal funcionamento do código.</li>
+
+</div>
+
 ## Exemplificação
 Nesse gif é possivel observar o funcionamento do codigo de uma maneira mais visual.<br>
 Acontecimentos:
@@ -144,12 +164,12 @@ Acontecimentos:
 </p>
 
 ## Custo Computacional
-
+O custo desse algoritmo é inclusivo devido ao algoritmo ser do tipo randomico oque se torna impossivel o calculo do custo visto que a cada hora que rodamos o valor poderá ser alterado e dessa forma nao se pode calcular o custo do mesmo. Entretanto foi feito o calculo do tempo gasto para a compilação do codigo esse valor é de: XXXX(MEDIA), essse valor foi obtido pelo calculo da media do resultado de tempo gasto para  a cada compilação do programa, que foi analisada 10 vezes. 
 
 ## Resultados esperados 
 
 ## Conclusão 
-Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, em sua implementação foi possivel ser feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos sobre problemas que poderiam ocorrer no decorrer da atividade, vistos em aula, sendo aplicado os conehcimentos de custo computacional, por mais de que tenha um custo mais caro de memoria,devido a criação de arquivos para cada matriz, esse algorimo se torna melhor no desempenho. 
+Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, sua implementação foi feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos obtidos sobre problemas que poderiam ocorrer no decorrer da atividade como por exemplo estouro de memoria ao analisarmos uma matriz muito grande, vistos em aula,  e foram aplicados estrategias para um melhor desenvolvimento do codigo, por mais de que tenha um custo mais caro de memoria,devido a criação de arquivos para cada matriz, esse algorimo se torna melhor no desempenho visto que se pode analisar matrizes muito grandes sem problemas à dificuldade de leitura. 
 
 ## Compilação e Execução
 
