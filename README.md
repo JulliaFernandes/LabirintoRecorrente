@@ -70,7 +70,8 @@ De maneira geral nessa função é feita a abertura do arquivo que contem a matr
 - Logo apos a chamada da função de percorrer é visto tambem se nossa vida acabou, pois se sim, devemos parar o codigo e informar ao usuario que o jogo foi finalizado e que ele chegou ao nivel zero de vidas.
 - Por fim a função é atualizada para proseguirmos para o proximo arquivo e faremos os mesmos passos se tudo continuar sendo cumprido.
 - Essa iteração ocorre enquanto tivermos vida, ou se o todo o caminho feito ainda possuir itens a serem coletados.<br>
-  - <strong>Importante:</strong> a decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo `input.data`, se chegado a ultima matriz do arquivo voltamos a primeira matriz. 
+  <!-- - <strong>Importante:</strong> a decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo `input.data`, se chegado a ultima matriz do arquivo voltamos a primeira matriz. 
+  - O criterio de decição para começar uma nova matriz é sempre a posição inicial em que começou o jogo, se a posição for alterada devido a existencia de parede as matrizes seguintes iram começar com essa nova posição. -->
 
 
 <strong>Explicação detalhada da função 'PercorrerMatriz':</strong><br>
@@ -127,10 +128,11 @@ Essa função tem como criterio de decisão qual direção o usuario ira, feita 
 </table>
 
 <h3>Informações importantes</h3>
--A função 'Vida' é necessario um tipo de ação que ira ocorrer com ela, a tabela abaixo exemplifica oque cada numero significa.<br>
-    -Outros valores diferentes dos mostrados na tebela levaram ao mal funcionamento do codigo.
 <ul>
-  <li>A função 'Vida' é necessária para indicar o tipo de ação que irá ocorrer com ela. A tabela abaixo exemplifica o que cada número significa:</li>
+   <li>A decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo `input.data`, se chegado a ultima matriz do arquivo voltamos a primeira matriz.</li>
+   <li>O criterio de decição para a posição inicial de uma nova matriz é sempre a posição inicial em que começou o jogo, se a posição for alterada devido a existencia de parede as matrizes seguintes iram começar com essa nova posição.</li>
+   <li>Na função 'Vida' é necessária indicar o tipo de ação que irá ocorrer com ela. A tabela abaixo exemplifica o que cada número significa:</li>
+   <li>É criado um arquivo 'output.data' que ira armazenar todas as matrizes modificadas ou nao ao final do jogo, dessa maneira o usuario poderá comparar com as matrizes presente no arquivo 'input.data' e ver as posições que foram acessadas pelo personagem</li>
 </ul>
     
 <div align="center">
@@ -142,7 +144,6 @@ Essa função tem como criterio de decisão qual direção o usuario ira, feita 
 | '1'              | Adicionar 1 unidade à vida                              |
 
 <li>Outros valores diferentes dos mostrados na tabela podem levar ao mal funcionamento do código.</li>
-
 </div>
 
 ## Exemplificação
@@ -169,7 +170,7 @@ O custo desse algoritmo é inclusivo devido ao algoritmo ser do tipo randomico o
 ## Resultados esperados 
 
 ## Conclusão 
-Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, sua implementação foi feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos obtidos sobre problemas que poderiam ocorrer no decorrer da atividade como por exemplo estouro de memoria ao analisarmos uma matriz muito grande, vistos em aula,  e foram aplicados estrategias para um melhor desenvolvimento do codigo, por mais de que tenha um custo mais caro de memoria,devido a criação de arquivos para cada matriz, esse algorimo se torna melhor no desempenho visto que se pode analisar matrizes muito grandes sem problemas à dificuldade de leitura. 
+Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, sua implementação foi feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos obtidos sobre problemas que poderiam ocorrer no decorrer da atividade como por exemplo estouro de memoria ao analisarmos uma matriz muito grande, ditos em aula,  e foram aplicados estrategias para um melhor desenvolvimento do codigo, por mais de que tenha um custo mais caro de memoria,devido a criação de arquivos para cada matriz, esse algorimo se torna melhor no desempenho visto que se pode analisar matrizes muito grandes sem problemas à dificuldade de leitura. 
 
 ## Compilação e Execução
 
