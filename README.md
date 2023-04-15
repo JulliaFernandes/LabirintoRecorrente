@@ -168,6 +168,10 @@ Acontecimentos:
 O custo desse algoritmo é inclusivo devido ao algoritmo ser do tipo randomico oque se torna impossivel o calculo do custo visto que a cada hora que rodamos o valor poderá ser alterado e dessa forma nao se pode calcular o custo do mesmo. Entretanto foi feito o calculo do tempo gasto para a compilação do codigo esse valor é de: XXXX(MEDIA), essse valor foi obtido pelo calculo da media do resultado de tempo gasto para  a cada compilação do programa, que foi analisada 10 vezes. 
 
 ## Resultados esperados 
+É esperado que apareça ao usuarios todas essas informções referentes a missão do personagem e ao caminho que ele percorreu, dizendo se ele conseguiu cumprir sua missão ou se morreu tentando. E tudo a respeito do que foi enfrentado e percorrido, durante o jogo.
+<p align="center">
+<img src="/imgs/Terminal.png" alt="Terminal Usuario">
+</p>
 
 ## Conclusão 
 Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, sua implementação foi feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos obtidos sobre problemas que poderiam ocorrer no decorrer da atividade como por exemplo estouro de memoria ao analisarmos uma matriz muito grande, ditos em aula,  e foram aplicados estrategias para um melhor desenvolvimento do codigo, por mais de que tenha um custo mais caro de memoria,devido a criação de arquivos para cada matriz, esse algorimo se torna melhor no desempenho visto que se pode analisar matrizes muito grandes sem problemas à dificuldade de leitura. 
