@@ -6,7 +6,6 @@
 using namespace std;
 
 int main(){
-	//clock_t inicio = clock();
 	auto inicio = chrono::high_resolution_clock::now();
 
 	int tam_matriz, qtd_matriz;
@@ -30,12 +29,9 @@ int main(){
 	LerArquivo(matriz, tam_matriz, qtd_matriz);
 	StartJogo(linha, coluna, tam_matriz, qtd_matriz, vida);
 
-	//clock_t fim = clock();
 	auto fim = chrono::high_resolution_clock::now();
 	auto tempoTotalExecucao = chrono::duration_cast<chrono::seconds>(fim - inicio);
-	//cout << "Tempo de execução: " << duration.count() << " segundos" << endl;
-
-	//double tempoTotalExecucao = (double) (fim-inicio)/CLOCKS_PER_SEC;
 	cout << "TEMPO DE EXECUÇÂO É DE: " << tempoTotalExecucao.count() << " SEGUNDOS" << endl; 
+	
 	return 0;
 }

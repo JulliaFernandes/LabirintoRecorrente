@@ -86,10 +86,7 @@ void LerArquivo(string **matriz, int tam_matriz, int qtd_matriz)
             }
             else{
                 if (linhaVazia(linha_arq)){
-                    //cout << "---------------------------------------------";
-                    //cout << "\n\t---Nova Matriz---" << endl;
                     CriandoArquivoParaCadaMatriz(matriz, tam_matriz, qtd_matriz, i);
-                    //ImprimirMatriz(matriz, tam_matriz);
                     aux_coluna = 0;
                     aux_linha = 0;
                 }
@@ -300,12 +297,10 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int &vida)
 
     while (auxVida == true)
     {
-        //cout << "aaaaa" << endl; // ainda nao morri e ainda tem lugar pra passar
         if (i == qtd_matriz)
         {   
             passouTodasMatrizes=true;
             i = 0;
-            //cout << "QND PASSA AQUI" << endl;
         }
         /* if(passouTodasMatrizes && comeco){ //se passou em todas as matrizes se passou na posição inicial
             if(CaminhoEhVazio==true){
@@ -321,27 +316,21 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int &vida)
         nomeArquivo = nomesDosArquivos[i];
         RecebeNomeDosArquivosJaCriados(CaminhoPercorrido, qtd_matriz);
         auxCaminhoPercorrido = CaminhoPercorrido[i];
-        //i++;
 
         //cout << "\nNOME ARQUIVO: " << nomeArquivo<< endl;
         
         arquivo_leitura.open(nomeArquivo, ios::in);
-        while (!arquivo_leitura.eof())
-        {
-            while (getline(arquivo_leitura, linha_arq, '\n'))
-            {
+        while (!arquivo_leitura.eof()){
+            while (getline(arquivo_leitura, linha_arq, '\n')) {
                 stringstream aux(linha_arq);
-                while (getline(aux, elemento, ' '))
-                { // lendo a cada elemento presente na minha linha armazena para minha variavel elemento e tendo o delimitador ''
-                    if (aux_coluna < tam_matriz && aux_linha < tam_matriz)
-                    {
+                while (getline(aux, elemento, ' ')) { // lendo a cada elemento presente na minha linha armazena para minha variavel elemento e tendo o delimitador ''
+                    if (aux_coluna < tam_matriz && aux_linha < tam_matriz){
                         matriz_aux[aux_linha][aux_coluna] = elemento;
                         aux_coluna++;
                     }
                 }
 
-                if (aux_coluna > 0 && aux_linha < tam_matriz)
-                {
+                if (aux_coluna > 0 && aux_linha < tam_matriz){
                     aux_linha++;
                     aux_coluna = 0;
                 }
@@ -389,8 +378,6 @@ void StartJogo(int linha, int coluna, int tam_matriz, int qtd_matriz, int &vida)
                 CaminhoEhVazio=true;
                 passouTodasMatrizes=false;
                 comeco=false;
-                //cout << "I: "<< i << endl;
-                //cout << "RRRR " << endl;
             }
         }
         
@@ -471,8 +458,7 @@ void PassaNovaMatrizParaArquivo(string **matriz, string nomeArq, int tam_matriz)
 
     arquivo_escrita.open(nomeArq, ios::out);
     for (int i = 0; i < tam_matriz; i++){
-        for (int j = 0; j < tam_matriz; j++)
-        {
+        for (int j = 0; j < tam_matriz; j++){
             arquivo_escrita << matriz[i][j] << " ";
         }
         arquivo_escrita << endl;
@@ -485,10 +471,8 @@ void ExcluiArquivosCriados(int qtd_matriz)
     for (int i = 0; i < qtd_matriz; i++){
         char nomeArquivoRemovido[100];
         strcpy(nomeArquivoRemovido, nomesDosArquivos[i].c_str());
-        // remove(nomeArquivoRemovido);
         int resultado = remove(nomeArquivoRemovido);
-        if (resultado != 0)
-        {
+        if (resultado != 0){
             perror("Erro ao excluir arquivo");
         }
     }
@@ -559,13 +543,8 @@ void MudaPosicaoAtual(string **matriz, int& linha_aux, int& coluna_aux, int acao
             //ImprimirMatriz(matriz, tam_matriz);
             //cout << "Mochila: " << mochila << endl << endl;
         }
-        else
-        {
-        }
     }
     CaminhoFoiPercorrido(caminho, linha_aux, coluna_aux, nomeArq);
-    //cout << ">TAM " << caminho.caminho.size() << endl;
-    //cout << ">>CASAS PASSADAS " << totalCasas << endl;
 }
 
 void CaminhoFoiPercorrido(SalvaCaminho& caminhoNaoPercorrido, int linha, int coluna, string nomeArq){
