@@ -165,20 +165,8 @@ Acontecimentos:
 </p>
 
 ## Custo Computacional
-O custo desse algoritmo é inclusivo devido ao algoritmo ser do tipo randomico oque se torna impossivel o calculo do custo visto que a cada hora que rodamos o valor poderá ser alterado e dessa forma nao se pode calcular o custo do mesmo. Entretanto foi feito o calculo do tempo gasto para a compilação do codigo esse valor é de:  2.2 segundos, essse valor foi obtido pelo calculo da media do resultado de tempo gasto para  a cada compilação do programa, que foi analisada 10 vezes. 
+O custo desse algoritmo é inclusivo devido ao algoritmo ser do tipo randomico oque se torna impossivel o calculo do custo visto que a cada hora que rodamos o valor poderá ser alterado e dessa forma nao se pode calcular o custo do mesmo. Entretanto foi feito o calculo do tempo gasto para a compilação do codigo esse valor é de:  2.2 segundos, essse valor foi obtido pelo calculo da media do resultado de tempo gasto para  a cada compilação do programa com a mesma entrada de dados, a presente no arquivo input.data, que foi analisada 10 vezes. 
 
-|  N° de vezes | Tempo em segundos |
-| :--------------: | :--------------: |
-|  1°  |   2 seg  |
-|  2°  |   3 seg  |
-|  3°  |   1 seg  |
-|  4°  |   2 seg  |
-|  5°  |   2 seg  |
-|  6°  |   5 seg  |
-|  7°  |   2 seg  |
-|  8°  |   1 seg  |
-|  9°  |   3 seg  |
-| 10°  |   1 seg  |
 
 ## Resultados esperados 
 É esperado que apareça ao usuarios todas essas informções referentes a missão do personagem e ao caminho que ele percorreu, dizendo se ele conseguiu cumprir sua missão ou se morreu tentando, tudo a respeito do que foi enfrentado e percorrido durante o jogo e o tempo que foi gasto para ser rodado esse algoritmo.
