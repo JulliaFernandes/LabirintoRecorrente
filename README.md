@@ -33,10 +33,10 @@ Algumas condições sao impostas para o bom funciomanto de codigo:
 - Sua missão é percorrer as matrizes até que todo o caminho percorrido pelo garoto se torne zero ou que ele venha a morrer devido aos perigos enfrentados.
 
 ## Arquivos
-<strong>Main.cpp:</strong> É feito a chamada inicialmente de uma função que ira retornar o tamanho da matriz presente no arquivo input.data e quantas matriz possuem nesse arquivo, é feita tambem a chamada das duas funções principais do funcionamento do codigo, 'LerArquivo' e 'StartJogo', é nela em que todo nosso codigo sera executado.<br>
-<strong>Labirinto.hpp:</strong> Onde é criada todas as nossas funções que seram executadas no decorrer do algoritmo.<br>
+<strong>Main.cpp:</strong> É feito a chamada inicialmente de uma função que ira retornar o tamanho da matriz presente no arquivo input.data e quantas matriz possuem nesse arquivo, é feita tambem a chamada das tres funções principais do funcionamento do codigo, `LerArquivo`, `StartJogo` e `PercorrerMatriz`, é nela em que todo nosso codigo sera executado.<br>
+<strong>Labirinto.hpp:</strong> Onde é criada todas as nossas funções que serão executadas no decorrer do algoritmo.<br>
 <strong>Labirinto.cpp:</strong> Onde é feita a estruturação de todas as funções criadas e onde sera desenvolvido todo o codigo.<br>
-<strong>Terminal:</strong> Aparece ao usuario, quantas casas foram percorridas durante a execução do codigo, quantos itens foram coletados, a quantidade de perigos enfrentados e quantas posiçoes nao foram acessadas durante o percurso gerado pelo codigo.<br>
+<strong>Terminal:</strong> Aparece ao usuario, o total de casas percorridas durante a execução do codigo, o total de itens coletados, o total de perigos enfrentados, o numero de posições que foram visitadas e quantas posiçoes nao foram acessadas durante o percurso gerado pelo codigo.<br>
 <strong>dataset/input.data:</strong> Arquivo contendo o tamanho da matriz, a quantidade matrizes, e as matrizes que serão utlizadas.<br>
 <strong>dataset/output.data:</strong> Arquivo contento todas as matrizes, as que foram modificadas ou não, para fins visuais de quais posições foram percorridas.
 
@@ -59,14 +59,14 @@ As funções principais que fazem o funcionamento do codigo sao: `LerArquivo`, `
 </div>
 
 <strong>Explicação detalhada da função 'Startjogo':</strong><br>
-De maneira geral nessa função é feita a abertura do arquivo que contem a matriz a ser percorrida no momento, é chamado a função que ira percorrer a matriz e é onde é feito a analise o numero de vidas, se devemos ou não continuar no jogo e por fim é nela que nos teletrasportamos para a proxima matriz.
+De maneira geral nessa função é feita a abertura do arquivo que contem a matriz a ser percorrida no momento, é chamado a função que ira percorrer a matriz e é onde é feito a analise do numero de vidas se devemos ou não continuar no jogo e por fim é nela que nos teletrasportamos para a proxima matriz.
 
 - É pedido ao usuario que digite o numero da posição inical em que deseja começar o jogo
   - importante ressaltar que se a posição digitada pelo ususario for uma parede(#), a posição de inicio sera gerada aleatoriamente ate que seja uma posição aceita pelo programa, as exeções são: se forem paredes ou entao se for a ultima linha ou ultima coluna, sendo as duas ultimas, as condiçoes de teletranspote de uma matriz para a outra. O jogo só começará se tudo isso for cumprido.
 - É criado uma matriz de string auxiliar que sera ela que usaremos durante todo nosso codigo para armazenarmos as matrizes lidas de seus respectivos arquivos e usa-las para percorrer
 - Uma variavel recebera os nomes, um por vez e em sequencia, do vetor que armazena o nome de todos os arquivos criados para as matrizes, pois é essa variavel que fara o controle de qual arquivo de matriz estamos e qual sera a matriz alterada durante o percurso.
-- Se todos os criterios acima estiverem de acordo, começamos o jogo, chamando a função `PercorrerMatriz`
-- Apos feito todo o percurso de nossa matriz, a mesma se encontra diferente de antes logo ela deve ser passada para o seu arquivo ja modificada, para isso chamamos a função `PassaNovaMatrizParaArquivo`
+- Se todos os criterios acima estiverem de acordo, começamos o jogo, chamando a função `PercorrerMatriz`(linha X)
+- Apos feito todo o percurso de nossa matriz, a mesma se encontra diferente de antes logo ela deve ser passada para o seu arquivo ja modificada, para isso chamamos a função `PassaNovaMatrizParaArquivo`(linha X)
 - Logo apos a chamada da função de percorrer é visto tambem se nossa vida acabou, pois se sim, devemos parar o codigo e informar ao usuario que o jogo foi finalizado e que ele chegou ao nivel zero de vidas.
 - Por fim a função é atualizada para proseguirmos para o proximo arquivo e faremos os mesmos passos se tudo continuar sendo cumprido.
 - Essa iteração ocorre enquanto tivermos vida, ou se o todo o caminho feito ainda possuir itens a serem coletados.<br>
@@ -80,9 +80,10 @@ Essa função tem como criterio de decisão qual direção o usuario ira, feita 
 - Assim que inicializado essa função, a posição em que o personagem se encontra ja sofrerá mudanças, ate mesmo a posição inical em que o usuario começa o jogo.
 - Ela é realizada por um loop que somente se atingirmos a posicao que nos levara a outra matriz ou entao se nossa vida chegar a zero, ele é parado. (Os criterios de teletransporte ja foram explicados acima)
 - É gerado um numero randomico entre 0 a 7 e que cada um representara a decisao de direção a ser seguida.
-- É tratado os casos de extremidades da matriz, quando gerado um numero em que a posição nao é possivel ser seguida, é gerado um outro numero aleatorio ate que seja possivel o personagem se mover.
-- É visto se a posição em que o personagem irá é um perigo(*) ou um item(numeros de 0 a 9), se em caso de perigo, o personagem sofre um dano em sua vida e perde uma, se em caso de item, ele recebe um item que ira para sua mochila e o numero naquela posição diminui em 1 unidade, ate chegar em zero.
+- É tratado os casos de extremidades da matriz, quando gerado um numero em que a posição nao é possivel ser seguida, que é a existencia de parede(#), é gerado um outro numero aleatorio ate que seja possivel o personagem se mover.
+- É visto se a posição em que o personagem irá é um perigo(*) ou um item(numeros de 0 a 9), se em caso de perigo, o personagem sofre um dano em sua vida e perde uma, se em caso de item, ele recebe um item que ira para sua mochila e o numero naquela posição diminui em 1 unidade.
    - Sempre que a mochila chega a 4 itens, os itens sao trocados em 1 vida e é zerada a mochila novamente, para os casos em que a vida ja esteja totalmente cheia, nada ocorre à vida mas sua mochila será zerada.
+   - Se a posição em que se encontra ja estiver zerada, nada mais ocorre a ela.
 
 <p align="center">
 <strong><em>Direçãoes possiveis em cada 'case' presente no switch </em></strong>
@@ -131,8 +132,8 @@ Essa função tem como criterio de decisão qual direção o usuario ira, feita 
 <ul>
    <li>A decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo `input.data`, se chegado a ultima matriz do arquivo voltamos a primeira matriz.</li>
    <li>O criterio de decição para a posição inicial de uma nova matriz é sempre a posição inicial em que começou o jogo, se a posição for alterada devido a existencia de parede as matrizes seguintes iram começar com essa nova posição.</li>
-   <li>Na função 'Vida' é necessária indicar o tipo de ação que irá ocorrer com ela. A tabela abaixo exemplifica o que cada número significa:</li>
    <li>É criado um arquivo 'output.data' que ira armazenar todas as matrizes modificadas ou nao ao final do jogo, dessa maneira o usuario poderá comparar com as matrizes presente no arquivo 'input.data' e ver as posições que foram acessadas pelo personagem</li>
+   <li>Na função 'Vida' é necessária indicar o tipo de ação que irá ocorrer com ela. A tabela abaixo exemplifica o que cada número significa:</li>
 </ul>
     
 <div align="center">
@@ -166,7 +167,7 @@ Acontecimentos:
 
 ## Pergunta
 <h3>Qual o custo computacional da sua estratégia randômica? Se mostrou uma boa alternativa de execução?</h3>
-    O custo desse algoritmo é inclusivo devido ao algoritmo ser do tipo randomico oque se torna impossivel o calculo do custo visto que a cada hora que rodamos o valor poderá ser alterado e dessa forma nao se pode calcular o custo do mesmo. Entretanto foi feito o calculo da media do tempo gasto para a compilação do codigo, foi rodado  10 vezes com a mesma entrada de dados presente no arquivo input.data, esse valor obtido é de:  2.2 segundos.
+    Conclui-se que o custo do algoritmo é inclusivo, devido ao fato de ser um o algoritmo do tipo randômico, tornando impossível o calculo do custo. Mas é possível usar o cálculo do tempo gasto para executar o algoritmo como uma medida aproximada de seu desempenho. Uma técnica comum para isso é a execução repetida do algoritmo com a mesma entrada de dados, a presente no arquivo inpput.data, e o cálculo da média do tempo gasto, com isso baseado em 10 execuções do codigo foi possível obter uma média de tempo para compilação de 2.2 segundos.
 
 <!-- 
 ## Custo Computacional
@@ -180,7 +181,7 @@ O custo desse algoritmo é inclusivo devido ao algoritmo ser do tipo randomico o
 </p>
 
 ## Conclusão 
-Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, sua implementação foi feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos obtidos sobre problemas que poderiam ocorrer no decorrer da atividade como por exemplo estouro de memoria ao analisarmos uma matriz muito grande, ditos em aula,  e foram aplicados estrategias para um melhor desenvolvimento do codigo, por mais de que tenha um custo mais caro de memoria,devido a criação de arquivos para cada matriz, esse algorimo se torna melhor no desempenho visto que se pode analisar matrizes muito grandes sem problemas à dificuldade de leitura. 
+Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, sua implementação foi feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos obtidos sobre problemas que poderiam ocorrer no decorrer da atividade como por exemplo estouro de memoria ao analisarmos uma matriz muito grande, discutidas em aula,  e foram aplicados estrategias para um melhor desenvolvimento do codigo, por mais de que tenha um custo mais caro de memoria,devido a criação de arquivos para cada matriz, esse algorimo se torna melhor no desempenho visto que se pode analisar matrizes muito grandes sem problemas à dificuldade de leitura, foi possivel tambem concluir que nao ha meios de calcular o custo de algoritmos randomicos entao uma outra opção de exemplificação do custo seria mostrando o tempo de execução. 
 
 ## Compilação e Execução
 
