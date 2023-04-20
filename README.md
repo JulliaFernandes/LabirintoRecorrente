@@ -133,6 +133,7 @@ Essa função tem como criterio de decisão qual direção o usuario ira, feita 
    <li>A decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo `input.data`, se chegado a ultima matriz do arquivo voltamos a primeira matriz.</li>
    <li>O criterio de decição para a posição inicial de uma nova matriz é sempre a posição inicial em que começou o jogo, se a posição for alterada devido a existencia de parede as matrizes seguintes iram começar com essa nova posição.</li>
    <li>É criado um arquivo 'output.data' que ira armazenar todas as matrizes modificadas ou nao ao final do jogo, dessa maneira o usuario poderá comparar com as matrizes presente no arquivo 'input.data' e ver as posições que foram acessadas pelo personagem</li>
+ <li>É tratado quando o personagem se teltransporta para uma nova matriz se a posição inicial em que se encontra, se em seu entorno possui somente paredes, pois se possuir é gerado uma nova posição para o mesmo iniciar</li>
    <li>Na função 'Vida' é necessária indicar o tipo de ação que irá ocorrer com ela. A tabela abaixo exemplifica o que cada número significa:</li>
 </ul>
     
