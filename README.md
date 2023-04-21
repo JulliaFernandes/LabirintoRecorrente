@@ -1,4 +1,9 @@
-# LabirintoRecorrente
+<h1 align="center" font-size="200em"><b>LabirintoRecorrente</b></h1>
+<div align="center">
+ <img src="/imgs/maze.jpg" alt="Pasta Dataset" width="200em">
+ 
+</div>
+
 [![requirement](https://img.shields.io/badge/IDE-Visual%20Studio%20Code-informational)](https://code.visualstudio.com/docs/?dv=linux64_deb)
 ![Linguagem](https://img.shields.io/badge/Linguagem-C%2B%2B-blue)<br>
 <strong>Atividade realizada no 3º periodo para a disciplina de Algoritmos e Estrutura de Dados.</strong>
@@ -133,7 +138,7 @@ Essa função tem como criterio de decisão qual direção o usuario ira, feita 
    <li>A decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo `input.data`, se chegado a ultima matriz do arquivo voltamos a primeira matriz.</li>
    <li>O criterio de decição para a posição inicial de uma nova matriz é sempre a posição inicial em que começou o jogo, se a posição for alterada devido a existencia de parede as matrizes seguintes iram começar com essa nova posição.</li>
    <li>É criado um arquivo 'output.data' que ira armazenar todas as matrizes modificadas ou nao ao final do jogo, dessa maneira o usuario poderá comparar com as matrizes presente no arquivo 'input.data' e ver as posições que foram acessadas pelo personagem</li>
- <li>É tratado quando o personagem se teltransporta para uma nova matriz se a posição inicial em que se encontra, se em seu entorno possui somente paredes, pois se possuir é gerado uma nova posição para o mesmo iniciar</li>
+ <li>É tratado quando o personagem se teletransporta para uma nova matriz se a posição inicial em que se encontra, se em seu entorno possui somente paredes, pois se possuir é gerado uma nova posição para o mesmo iniciar</li>
    <li>Na função 'Vida' é necessária indicar o tipo de ação que irá ocorrer com ela. A tabela abaixo exemplifica o que cada número significa:</li>
 </ul>
     
@@ -168,7 +173,7 @@ Acontecimentos:
 
 ## Pergunta
 <h3>Qual o custo computacional da sua estratégia randômica? Se mostrou uma boa alternativa de execução?</h3>
-    Conclui-se que o custo do algoritmo é inclusivo, devido ao fato de ser um o algoritmo do tipo randômico, tornando impossível o calculo do custo. Mas é possível usar o cálculo do tempo gasto para executar o algoritmo como uma medida aproximada de seu desempenho. Uma técnica comum para isso é a execução repetida do algoritmo com a mesma entrada de dados, a presente no arquivo inpput.data, e o cálculo da média do tempo gasto, com isso baseado em 10 execuções do codigo foi possível obter uma média de tempo para compilação de 2.2 segundos.
+    Conclui-se que o custo do algoritmo é inclusivo, devido ao fato de ser um o algoritmo do tipo randômico, tornando impossível o calculo do custo. Mas é possível usar o cálculo do tempo gasto para executar o algoritmo como uma medida aproximada de seu desempenho. Uma técnica comum para isso é a execução repetida do algoritmo com a mesma entrada de dados, a presente no arquivo input.data, e o cálculo da média do tempo gasto, com isso baseado em 10 execuções do codigo foi possível obter uma média de tempo para compilação de 2.2 segundos.
 
 <!-- 
 ## Custo Computacional
@@ -182,7 +187,7 @@ O custo desse algoritmo é inclusivo devido ao algoritmo ser do tipo randomico o
 </p>
 
 ## Conclusão 
-Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, sua implementação foi feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos obtidos sobre problemas que poderiam ocorrer no decorrer da atividade como por exemplo estouro de memoria ao analisarmos uma matriz muito grande, discutidas em aula,  e foram aplicados estrategias para um melhor desenvolvimento do codigo, por mais de que tenha um custo mais caro de memoria,devido a criação de arquivos para cada matriz, esse algorimo se torna melhor no desempenho visto que se pode analisar matrizes muito grandes sem problemas à dificuldade de leitura, foi possivel tambem concluir que nao ha meios de calcular o custo de algoritmos randomicos entao uma outra opção de exemplificação do custo seria mostrando o tempo de execução. 
+Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, sua implementação foi feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos obtidos sobre problemas que poderiam ocorrer no decorrer da atividade como por exemplo estouro de memoria ao analisarmos uma matriz muito grande, discutidas em aula,  e foram aplicados estrategias para um melhor desenvolvimento do codigo, por mais de que tenha um custo mais caro de memoria,devido a criação de arquivos para cada matriz, esse algorimo se torna melhor no desempenho visto que se pode analisar matrizes muito grandes sem problemas à dificuldade de leitura, foi possivel tambem concluir que nao ha meios de calcular o custo de algoritmos randomicos entao uma outra opção de exemplificação seria mostrando o tempo de execução. 
 
 ## Compilação e Execução
 
