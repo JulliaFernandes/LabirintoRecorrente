@@ -48,14 +48,14 @@ Algumas condições sao impostas para o bom funciomanto de codigo:
 ## Resolução do problema 
 As funções principais que fazem o funcionamento do codigo sao: `LerArquivo`, `StartJogo` e `PercorrerMatriz`, são nelas que é feita toda a implementação do desenvolvimento do codigo, cumprimindo todas as codiçoes passadas pelo professor.<br>
 
-<strong>Explicação detalhada da função 'LerArquivo'(Linha 71):</strong>
+<strong>Explicação detalhada da função 'LerArquivo' (Linha 71):</strong>
 
 - É feita a abertura do arquivo input.data, pois é nela que esta armazenado todas as nossas matrizes que usaremos durante todo o nosso jogo.</li>
 - O arquivo input.data é lido de maneira que a cada linha vazia vista, é sinal de que toda uma matriz foi percorrida, e desse modo podemos salvar essa matriz lida em um arquivo que contera somente ela.
    - Nesse codigo, a fim de melhorar o desempenho e nao ocupar tanta memoria RAM, foi adotado que cada matriz presente no arquivo orignal, tera um arquivo contendo somente ela.
-- Esse arquivo unico de cada matriz é feito na função `CriandoArquivoParaCadaMatriz`(Linha 230) na qual cada arquivo recebera um nome diferente, basedo na sua matriz correspondente, ou seja, para a primeira matriz lida, o nome de seu arquivo sera: 'dataset/matriz1.data'<br>
+- Esse arquivo unico de cada matriz é feito na função `CriandoArquivoParaCadaMatriz` (Linha 230) na qual cada arquivo recebera um nome diferente, basedo na sua matriz correspondente, ou seja, para a primeira matriz lida, o nome de seu arquivo sera: 'matriz1.data'<br>
 
-<strong>OBS:</strong> Todos os arquivos de matrizes criados ficaram salvos na pasta dataset, que ao final do jogo todas elas seram excluidas, na função `ExcluiArquivosCriados`(Linha 435), para liberação de memória.
+<strong>OBS:</strong> Todos os arquivos de matrizes criados ficaram salvos na pasta dataset, que ao final do jogo todas elas seram excluidas, na função `ExcluiArquivosCriados` (Linha 435), para liberação de memória.
 
 
 <div align="center">
@@ -63,15 +63,15 @@ As funções principais que fazem o funcionamento do codigo sao: `LerArquivo`, `
   <p align="center"><em> Exemplificação pasta dataset </em></p>
 </div>
 
-<strong>Explicação detalhada da função 'Startjogo'(Linha 258):</strong><br>
+<strong>Explicação detalhada da função 'Startjogo' (Linha 258):</strong><br>
 De maneira geral nessa função é feita a abertura do arquivo que contem a matriz a ser percorrida no momento, é chamado a função que ira percorrer a matriz e é onde é feito a analise do numero de vidas se devemos ou não continuar no jogo e por fim é nela que nos teletrasportamos para a proxima matriz.
 
 - É pedido ao usuario que digite o numero da posição inical em que deseja começar o jogo
   - importante ressaltar que se a posição digitada pelo ususario for uma parede(#), a posição de inicio sera gerada aleatoriamente ate que seja uma posição aceita pelo programa, as exeções são: se forem paredes ou entao se for a ultima linha ou ultima coluna, sendo as duas ultimas, as condiçoes de teletranspote de uma matriz para a outra. O jogo só começará se tudo isso for cumprido.
 - É criado uma matriz de string auxiliar que sera ela que usaremos durante todo nosso codigo para armazenarmos as matrizes lidas de seus respectivos arquivos e usa-las para percorrer
 - Uma variavel recebera os nomes, um por vez e em sequencia, do vetor que armazena o nome de todos os arquivos criados para as matrizes, pois é essa variavel que fara o controle de qual arquivo de matriz estamos e qual sera a matriz alterada durante o percurso.
-- Se todos os criterios acima estiverem de acordo, começamos o jogo, chamando a função `PercorrerMatriz`(linha 125)
-- Apos feito todo o percurso de nossa matriz, a mesma se encontra diferente de antes logo ela deve ser passada para o seu arquivo ja modificada, para isso chamamos a função `PassaNovaMatrizParaArquivo`(linha 421)
+- Se todos os criterios acima estiverem de acordo, começamos o jogo, chamando a função `PercorrerMatriz` (Linha 125)
+- Apos feito todo o percurso de nossa matriz, a mesma se encontra diferente de antes logo ela deve ser passada para o seu arquivo ja modificada, para isso chamamos a função `PassaNovaMatrizParaArquivo` (Linha 421)
 - Logo apos a chamada da função de percorrer é visto tambem se nossa vida acabou, pois se sim, devemos parar o codigo e informar ao usuario que o jogo foi finalizado e que ele chegou ao nivel zero de vidas.
 - Por fim a função é atualizada para proseguirmos para o proximo arquivo e faremos os mesmos passos se tudo continuar sendo cumprido.
 - Essa iteração ocorre enquanto tivermos vida, ou se o todo o caminho feito ainda possuir itens a serem coletados.<br>
@@ -79,7 +79,7 @@ De maneira geral nessa função é feita a abertura do arquivo que contem a matr
   - O criterio de decição para começar uma nova matriz é sempre a posição inicial em que começou o jogo, se a posição for alterada devido a existencia de parede as matrizes seguintes iram começar com essa nova posição. -->
 
 
-<strong>Explicação detalhada da função 'PercorrerMatriz'(Linha 125):</strong><br>
+<strong>Explicação detalhada da função 'PercorrerMatriz' (Linha 125):</strong><br>
 Essa função tem como criterio de decisão qual direção o usuario ira, feita por switch's, sendo cada 'case' uma direção possivel.
 
 - Assim que inicializado essa função, a posição em que o personagem se encontra ja sofrerá mudanças, ate mesmo a posição inical em que o usuario começa o jogo.
@@ -134,13 +134,12 @@ Essa função tem como criterio de decisão qual direção o usuario ira, feita 
 </table>
 
 <h3>Informações importantes</h3>
-<ul>
-   <li>A decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo `input.data`, se chegado a ultima matriz do arquivo voltamos a primeira matriz.</li>
-   <li>O criterio de decição para a posição inicial de uma nova matriz é sempre a posição inicial em que começou o jogo, se a posição for alterada devido a existencia de parede as matrizes seguintes iram começar com essa nova posição.</li>
-   <li>É criado um arquivo 'output.data', na função `SalvaMatrizesAlteradas`(Linha 586), que ira armazenar todas as matrizes modificadas ou nao ao final do jogo, dessa maneira o usuario poderá comparar com as matrizes presente no arquivo 'input.data' e ver as posições que foram acessadas pelo personagem</li>
- <li>É tratado quando o personagem se teletransporta para uma nova matriz se a posição inicial em que se encontra, se em seu entorno possui somente paredes, função `ConfereSeEnvoltaEhParede`(Linha 541), pois se possuir é gerado uma nova posição para o mesmo iniciar</li>
-   <li>Na função 'Vida'(Linha 370) é necessária indicar o tipo de ação que irá ocorrer com ela. A tabela abaixo exemplifica o que cada número significa:</li>
-</ul>
+
+ - A decisao para qual matriz o personagem sera teletransportado é feita de modo sequencial, ou seja seguimos a ordem das matrizes que foram lidas do arquivo `input.data`, se chegado a ultima matriz do arquivo voltamos a primeira matriz.<br>
+ - O criterio de decição para a posição inicial de uma nova matriz é sempre a posição inicial em que começou o jogo, se a posição for alterada devido a existencia de parede as matrizes seguintes iram começar com essa nova posição.<br>
+ - É criado um arquivo `output.data`, na função `SalvaMatrizesAlteradas` (Linha 586), que ira armazenar todas as matrizes modificadas ou nao ao final do jogo, dessa maneira o usuario poderá comparar com as matrizes presente no arquivo `input.data` e ver as posições que foram acessadas pelo personagem.<br>
+ - É tratado quando o personagem se teletransporta para uma nova matriz se a posição inicial em que se encontra, se em seu entorno possui somente paredes, função `ConfereSeEnvoltaEhParede` (Linha 541), pois se possuir é gerado uma nova posição para o mesmo iniciar.<br>
+   - Na função 'Vida' (Linha 370) é necessária indicar o tipo de ação que irá ocorrer com ela. A tabela abaixo exemplifica o que cada número significa:<br>
     
 <div align="center">
 
