@@ -1,12 +1,12 @@
 <h1 align="center" font-size="200em"><b>LabirintoRecorrente</b></h1>
-<div align="center">
- <img src="/imgs/maze.jpg" alt="Pasta Dataset" width="200em">
- 
-</div>
+
+<div align = "center" >
+<img src="/imgs/maze.jpg" alt="Pasta Dataset" width="200em">
 
 [![requirement](https://img.shields.io/badge/IDE-Visual%20Studio%20Code-informational)](https://code.visualstudio.com/docs/?dv=linux64_deb)
-![Linguagem](https://img.shields.io/badge/Linguagem-C%2B%2B-blue)<br>
-<strong>Atividade realizada no 3º periodo para a disciplina de Algoritmos e Estrutura de Dados.</strong>
+![Make](https://img.shields.io/badge/Compilacao-Make-orange)
+![Linguagem](https://img.shields.io/badge/Linguagem-C%2B%2B-blue)
+</div>
 
 # Sumário
 
@@ -15,8 +15,8 @@
 - [Arquivos](#Arquivos)
 - [Resolução do Problema](#Resolução-do-problema)
 - [Exemplifição](#Exemplificação)
-- [Pergunta](#Pergunta)
 - [Resultados esperados](#Resultados-esperados)
+- [Pergunta](#Pergunta)
 - [Conclusão](#Conclusão)
 - [Compilação e Execução](#Compilação-e-Execução)
 - [Contato](#Contato)
@@ -171,6 +171,13 @@ Acontecimentos:
 <img src="/imgs/gif_maze.gif" alt="Gif Maze">
 </p>
 
+
+## Resultados esperados 
+É esperado que apareça ao usuarios todas essas informções referentes a missão do personagem e ao caminho que ele percorreu, dizendo se ele conseguiu cumprir sua missão ou se morreu tentando, tudo a respeito do que foi enfrentado e percorrido durante o jogo e o tempo que foi gasto para ser rodado esse algoritmo.
+<p align="center">
+<img src="/imgs/Terminal.png" alt="Terminal Usuario">
+</p>
+
 ## Pergunta
 <h3>Qual o custo computacional da sua estratégia randômica? Se mostrou uma boa alternativa de execução?</h3>
     Conclui-se que o custo do algoritmo é inclusivo, devido ao fato de ser um o algoritmo do tipo randômico, tornando impossível o calculo do custo. Mas é possível usar o cálculo do tempo gasto para executar o algoritmo como uma medida aproximada de seu desempenho. Uma técnica comum para isso é a execução repetida do algoritmo com a mesma entrada de dados, a presente no arquivo input.data, e o cálculo da média do tempo gasto, com isso baseado em 10 execuções do codigo foi possível obter uma média de tempo para compilação de 2.2 segundos.
@@ -179,12 +186,6 @@ Acontecimentos:
 ## Custo Computacional
 O custo desse algoritmo é inclusivo devido ao algoritmo ser do tipo randomico oque se torna impossivel o calculo do custo visto que a cada hora que rodamos o valor poderá ser alterado e dessa forma nao se pode calcular o custo do mesmo. Entretanto foi feito o calculo do tempo gasto para a compilação do codigo esse valor é de:  2.2 segundos, essse valor foi obtido pelo calculo da media do resultado de tempo gasto para  a cada compilação do programa com a mesma entrada de dados, a presente no arquivo input.data, que foi analisada 10 vezes. 
 -->
-
-## Resultados esperados 
-É esperado que apareça ao usuarios todas essas informções referentes a missão do personagem e ao caminho que ele percorreu, dizendo se ele conseguiu cumprir sua missão ou se morreu tentando, tudo a respeito do que foi enfrentado e percorrido durante o jogo e o tempo que foi gasto para ser rodado esse algoritmo.
-<p align="center">
-<img src="/imgs/Terminal.png" alt="Terminal Usuario">
-</p>
 
 ## Conclusão 
 Foi possivel concluir com essa atividades novas formas de implementação de caminhamento por matrizes, alem de desenvolviemnto de melhores estrategias para ajudar ao personagem a concluir sua missão, que é concluir um caminho completamente de zeros, sua implementação foi feita de modo que economize memoria ao usuario que esta jogando, graças aos conhecimentos obtidos sobre problemas que poderiam ocorrer no decorrer da atividade como por exemplo estouro de memoria ao analisarmos uma matriz muito grande, discutidas em aula,  e foram aplicados estrategias para um melhor desenvolvimento do codigo, por mais de que tenha um custo mais caro de memoria,devido a criação de arquivos para cada matriz, esse algorimo se torna melhor no desempenho visto que se pode analisar matrizes muito grandes sem problemas à dificuldade de leitura, foi possivel tambem concluir que nao ha meios de calcular o custo de algoritmos randomicos entao uma outra opção de exemplificação seria mostrando o tempo de execução. 
